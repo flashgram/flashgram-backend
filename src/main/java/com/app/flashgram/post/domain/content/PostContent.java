@@ -5,6 +5,7 @@ package com.app.flashgram.post.domain.content;
  * 게시글 내용은 최소 5자, 최대 1000자
  */
 public class PostContent extends Content {
+
     private static final int MIN_POST_LENGTH = 5;
     private static final int MAX_POST_LENGTH = 1000;
 
@@ -27,7 +28,7 @@ public class PostContent extends Content {
     @Override
     protected void checkText(String contentText) {
         if (contentText == null ||contentText.isEmpty()) {
-            throw new IllegalArgumentException("내용이 비어 있거나 null일 수 없습니다.");
+            throw new IllegalArgumentException("내용은 비어 있거나 null일 수 없습니다.");
         }
 
         if (contentText.length() < MIN_POST_LENGTH || contentText.length() > MAX_POST_LENGTH) {
