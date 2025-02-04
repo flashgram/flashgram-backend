@@ -1,5 +1,6 @@
 package com.app.flashgram.user.domain;
 
+import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import java.util.Objects;
 
 /**
@@ -9,8 +10,8 @@ public class User {
 
     private final Long id;
     private final UserInfo info;
-    private final UserRelationCounter followingCount;
-    private final UserRelationCounter followerCounter;
+    private final PositiveIntegerCounter followingCount;
+    private final PositiveIntegerCounter followerCounter;
 
     /**
      * 유저 도메인 객체 생성
@@ -18,7 +19,7 @@ public class User {
      * @param id       유저 식별자
      * @param userInfo 유저 정보 값 객체
      */
-    public User(Long id, UserInfo userInfo, UserRelationCounter followingCount, UserRelationCounter followerCounter) {
+    public User(Long id, UserInfo userInfo, PositiveIntegerCounter followingCount, PositiveIntegerCounter followerCounter) {
         this.id = id;
         this.info = userInfo;
         this.followingCount = followingCount;
