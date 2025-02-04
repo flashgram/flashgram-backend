@@ -1,5 +1,7 @@
 package com.app.flashgram.post.domain.content;
 
+import com.app.flashgram.post.common.DatetimeInfo;
+
 /**
  * 컨텐츠의 공통 속성과 유효성 검사를 정의하는 추상 클래스
  * 모든 컨텐츠는 이 클래스를 상속하여 구현
@@ -7,6 +9,7 @@ package com.app.flashgram.post.domain.content;
 public abstract class Content {
 
     String contentText;
+    final DatetimeInfo datetimeInfo;
 
     /**
      * 컨텐츠 객체를 생성
@@ -18,8 +21,15 @@ public abstract class Content {
         checkText(contentText);
 
         this.contentText = contentText;
+        this.datetimeInfo = new DatetimeInfo();
     }
 
+    public void updateContent(String updateContent) {
+        checkText(updateContent);
+
+        this.contentText = updateContent;
+        this.datetimeInfo.updateEditDatetime();
+    }
 
     /**
      * 컨텐츠 텍스트의 유효성을 검사 추상 메서드

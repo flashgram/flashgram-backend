@@ -1,10 +1,10 @@
-package com.app.flashgram.user.domain;
+package com.app.flashgram.common.domain;
 
-public class UserRelationCounter {
+public class PositiveIntegerCounter {
 
     private int count;
 
-    public UserRelationCounter() {
+    public PositiveIntegerCounter() {
         this.count = 0;
     }
 
