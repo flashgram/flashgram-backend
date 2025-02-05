@@ -9,7 +9,7 @@ import java.util.Objects;
 public class User {
 
     private final Long id;
-    private final UserInfo info;
+    private final UserInfo userInfo;
     private final PositiveIntegerCounter followingCount;
     private final PositiveIntegerCounter followerCounter;
 
@@ -19,11 +19,15 @@ public class User {
      * @param id       유저 식별자
      * @param userInfo 유저 정보 값 객체
      */
-    public User(Long id, UserInfo userInfo, PositiveIntegerCounter followingCount, PositiveIntegerCounter followerCounter) {
+    public User(Long id, UserInfo userInfo) {
+        if (userInfo == null) {
+            throw new IllegalArgumentException("유저 정보는 null일 수 없습니다.");
+        }
+
         this.id = id;
-        this.info = userInfo;
-        this.followingCount = followingCount;
-        this.followerCounter = followerCounter;
+        this.userInfo = userInfo;
+        this.followingCount = new PositiveIntegerCounter();
+        this.followerCounter = new PositiveIntegerCounter();
     }
 
     /**
@@ -95,5 +99,17 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int followerCount() {
+        return followerCounter.getCount();
+    }
+
+    public int followingCount() {
+        return followingCount.getCount();
     }
 }
