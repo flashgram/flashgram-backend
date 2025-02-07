@@ -8,8 +8,8 @@ import com.app.flashgram.post.common.DatetimeInfo;
  */
 public abstract class Content {
 
-    String contentText;
-    final DatetimeInfo datetimeInfo;
+    protected String contentText;
+    protected final DatetimeInfo datetimeInfo;
 
     /**
      * 컨텐츠 객체를 생성

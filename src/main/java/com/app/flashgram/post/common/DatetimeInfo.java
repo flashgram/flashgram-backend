@@ -29,7 +29,7 @@ public class DatetimeInfo {
         this.dateTime = LocalDateTime.now();
     }
 
-    public Boolean getEdited() {
+    public Boolean isEdited() {
         return isEdited;
     }
 
