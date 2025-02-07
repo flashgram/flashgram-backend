@@ -27,7 +27,7 @@ class PostTest {
     }
 
     @Test
-    void givenPOstCreated_whenLikeByOtherUser_thenThrowError() {
+    void givenPostCreated_whenLikeBySelf_thenThrowError() {
         //when, then
         assertThrows(IllegalArgumentException.class, () -> post.like(user));
     }
@@ -54,7 +54,7 @@ class PostTest {
     }
 
     @Test
-    void givenPostCreaded_whenUpdatedContent_thenContentShouldBeUpdated() {
+    void givenPostCreated_whenUpdatedContent_thenContentShouldBeUpdated() {
         //given
         String newPostContent = "new content";
 
@@ -66,7 +66,7 @@ class PostTest {
     }
 
     @Test
-    void givenPostCreaded_whenUpdatedOtherUserContent_thenThrowError() {
+    void givenPostCreated_whenUpdatedOtherUserContent_thenThrowError() {
         //given
         String newPostContent = "new content";
 

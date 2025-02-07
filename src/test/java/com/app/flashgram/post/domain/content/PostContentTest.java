@@ -32,7 +32,7 @@ class PostContentTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"갉, 닭, 슭, 칡"})
+    @ValueSource(strings = {"갉", "닭", "슭", "칡"})
     void givenContentLengthIsOverAndKorean_whenCreated_thenReturnThrowError(String koreanWord) {
         //given
         String content = koreanWord.repeat(1001);
@@ -42,7 +42,7 @@ class PostContentTest {
     }
 
     @Test
-    void givenContentLengthIsUnderLimitCreatePostContentThenThrowError() {
+    void givenContentLengthIsUnder_whenCreated_thenThrowError() {
         //given
         String content = "a".repeat(4);
 
@@ -52,7 +52,7 @@ class PostContentTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    void givenContentLengthIsEmptyCreateThenThrowError(String value) {
+    void givenContentIsEmpty_whenCreated_thenThrowError(String value) {
         //when, then
         assertThrows(IllegalArgumentException.class, () -> new PostContent(value));
     }

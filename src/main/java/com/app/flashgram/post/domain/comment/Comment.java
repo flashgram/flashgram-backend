@@ -52,7 +52,7 @@ public class Comment {
      * @param user 좋아요를 누르는 유저
      * @throws IllegalArgumentException 댓글 작성자가 자신의 댓글에 좋아요를 시도하는 경우
      */
-    public void ilke(User user) {
+    public void like(User user) {
         if (this.author.equals(user)) {
             throw new IllegalArgumentException();
         }
@@ -81,5 +81,13 @@ public class Comment {
         }
 
         this.content.updateContent(updateContent);
+    }
+
+    public int getLikeCount() {
+        return likeCount.getCount();
+    }
+
+    public String getContent() {
+        return content.getContentText();
     }
 }
