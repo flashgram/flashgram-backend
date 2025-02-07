@@ -24,4 +24,12 @@ public class UserInfo {
         this.name = name;
         this.profileImgUrl = profileImgUrl;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProfileImgUrl() {
+        return profileImgUrl;
+    }
 }
