@@ -101,15 +101,19 @@ public class User {
         return Objects.hashCode(id);
     }
 
-    public Long getId() {
-        return id;
-    }
-
     public int followerCount() {
         return followerCounter.getCount();
     }
 
     public int followingCount() {
         return followingCount.getCount();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public UserInfo getInfo() {
+        return userInfo;
     }
 }

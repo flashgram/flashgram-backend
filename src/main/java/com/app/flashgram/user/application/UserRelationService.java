@@ -48,7 +48,7 @@ public class UserRelationService {
         User user = userService.getUser(dto.userId());
         User targetUser = userService.getUser(dto.targetUserId());
 
-        if (userRelationRepository.isAlreadyFollow(user, targetUser)) {
+        if (!userRelationRepository.isAlreadyFollow(user, targetUser)) {
             throw new IllegalArgumentException("팔로우하고 있지 않은 유저입니다.");
         }
 
