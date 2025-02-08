@@ -1,6 +1,7 @@
 package com.app.flashgram.post.domain;
 
 import com.app.flashgram.common.domain.PositiveIntegerCounter;
+import com.app.flashgram.post.domain.content.Content;
 import com.app.flashgram.post.domain.content.PostContent;
 import com.app.flashgram.post.domain.content.PostPublicationState;
 import com.app.flashgram.user.domain.User;
@@ -12,19 +13,56 @@ public class Post {
 
     private final Long id;
     private final User author;
-    private final PostContent content;
+    private final Content content;
     private final PositiveIntegerCounter likeCount;
     private PostPublicationState state;
 
     /**
-     * 게시글 도메인 객체를 생성
+     * 게시글 생성 정적 팩토리 메서드
      *
-     * @param id      게시글 식별자
-     * @param author  게시글 작성자
+     * @param id 게시글 ID
+     * @param author 게시글 작성자
      * @param content 게시글 내용
-     * @throws IllegalArgumentException 작성자가 null인 경우
+     * @param state 게시글 공개 상태
+     * @return 생성된 게시글 객체
+     */
+    public static Post createPost(Long id, User author, String content, PostPublicationState state) {
+        return new Post(id, author, new PostContent(content), state);
+    }
+
+    /**
+     * 기본 공개 상태 게시글 생성을 위한 정적 팩토리 메서드
+     *
+     * @param id 게시글 ID
+     * @param author 게시글 작성자
+     * @param content 게시글 내용
+     * @return 생성된 게시글 객체
+     */
+    public static Post createDefaultPost(Long id, User author, String content) {
+        return new Post(id, author, new PostContent(content), PostPublicationState.PUBLIC);
+    }
+
+    /**
+     * 기본 공개 상태 게시글 생성을 위한 생성자
+     *
+     * @param id 게시글 ID
+     * @param author 게시글 작성자
+     * @param content 게시글 내용
      */
     public Post(Long id, User author, PostContent content) {
+        this(id, author, content, PostPublicationState.PUBLIC);
+    }
+
+    /**
+     * 게시글 생성 기본 생성자
+     *
+     * @param id 게시글 ID
+     * @param author 게시글 작성자
+     * @param content 게시글 내용
+     * @param state 게시글 공개 상태
+     * @throws IllegalArgumentException 작성자가 null인 경우
+     */
+    public Post(Long id, User author, Content content, PostPublicationState state) {
         if (author == null) {
             throw new IllegalArgumentException("작성자는 null일 수 없습니다.");
         }
@@ -33,7 +71,7 @@ public class Post {
         this.author = author;
         this.content = content;
         this.likeCount = new PositiveIntegerCounter();
-        this.state = PostPublicationState.PUBLIC;
+        this.state = state;
     }
 
     /**
