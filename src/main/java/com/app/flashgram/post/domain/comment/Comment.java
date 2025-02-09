@@ -16,6 +16,10 @@ public class Comment {
     private final CommentContent content;
     private final PositiveIntegerCounter likeCount;
 
+    public static Comment createComment(Post post, User author, String content) {
+        return new Comment(null, post, author, new CommentContent(content));
+    }
+
     /**
      * 게시글 도메인 객체를 생성
      *
