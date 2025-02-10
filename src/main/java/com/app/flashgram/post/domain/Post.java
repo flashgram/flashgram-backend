@@ -49,7 +49,7 @@ public class Post {
      * @param author 게시글 작성자
      * @param content 게시글 내용
      */
-    public Post(Long id, User author, PostContent content) {
+    public Post(Long id, User author, Content content) {
         this(id, author, content, PostPublicationState.PUBLIC);
     }
 
@@ -119,5 +119,17 @@ public class Post {
 
     public String getContent() {
         return content.getContentText();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public Content getContentObject() {
+        return content;
     }
 }
