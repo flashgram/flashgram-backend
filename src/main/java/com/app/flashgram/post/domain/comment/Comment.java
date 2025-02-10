@@ -3,6 +3,7 @@ package com.app.flashgram.post.domain.comment;
 import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.content.CommentContent;
+import com.app.flashgram.post.domain.content.Content;
 import com.app.flashgram.user.domain.User;
 
 /**
@@ -13,7 +14,7 @@ public class Comment {
     private final Long id;
     private final Post post;
     private final User author;
-    private final CommentContent content;
+    private final Content content;
     private final PositiveIntegerCounter likeCount;
 
     public static Comment createComment(Post post, User author, String content) {
@@ -29,7 +30,7 @@ public class Comment {
      * @param content 댓글 내용
      * @throws IllegalArgumentException 작성자, 게시글, 댓글 내용이 null인 경우
      */
-    public Comment(Long id, Post post, User author, CommentContent content) {
+    public Comment(Long id, Post post, User author, Content content) {
         if (author == null) {
             throw new IllegalArgumentException("작성자는 null일 수 없습니다.");
         }
@@ -93,5 +94,21 @@ public class Comment {
 
     public String getContent() {
         return content.getContentText();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public Content getContentObject() {
+        return content;
     }
 }
