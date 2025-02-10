@@ -1,9 +1,8 @@
 package com.app.flashgram.post.appication;
 
 import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
-import com.app.flashgram.post.appication.dto.LikePostRequestDto;
-import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
-import com.app.flashgram.post.appication.interfaces.LIkeRepository;
+import com.app.flashgram.post.appication.dto.LikeRequestDto;
+import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.user.application.UserService;
@@ -17,9 +16,9 @@ public class PostService {
     private final UserService userService;
 
     private final PostRepository postRepository;
-    private final LIkeRepository likeRepository;
+    private final LikeRepository likeRepository;
 
-    public PostService(UserService userService, PostRepository postRepository, LIkeRepository likeRepository) {
+    public PostService(UserService userService, PostRepository postRepository, LikeRepository likeRepository) {
         this.userService = userService;
         this.postRepository = postRepository;
         this.likeRepository = likeRepository;
@@ -56,7 +55,7 @@ public class PostService {
      * @param dto 게시글 수정 요청 정보
      * @return 수정된 게시글
      */
-    public Post updatePost(Long id, UpdatePostRequestDto dto) {
+    public Post updatePost(Long id, CreatePostRequestDto dto) {
         Post post = getPost(id);
         User user = userService.getUser(dto.userId());
 
@@ -70,8 +69,8 @@ public class PostService {
      *
      * @param dto 좋아요 요청 정보
      */
-    public void likePost(LikePostRequestDto dto) {
-        Post post = getPost(dto.postId());
+    public void likePost(LikeRequestDto dto) {
+        Post post = getPost(dto.targetId());
         User user = userService.getUser(dto.userId());
 
         if (likeRepository.checkLike(post, user)) {
@@ -86,12 +85,11 @@ public class PostService {
      * 게시글의 좋아요 취소
      * 좋아요를 누르지 않은 경우 아무 동작도 수행하지 않음
      *
-     * @param id 좋아요를 취소할 게시글 ID
-     * @param userId 좋아요를 취소하는 유저 ID
+     * @param dto 좋아요 요청 정보
      */
-    public void unlikePost(Long id, Long userId) {
-        Post post = getPost(id);
-        User user = userService.getUser(userId);
+    public void unlikePost(LikeRequestDto dto) {
+        Post post = getPost(dto.targetId());
+        User user = userService.getUser(dto.userId());
 
         if (likeRepository.checkLike(post, user)) {
             post.unlike();
