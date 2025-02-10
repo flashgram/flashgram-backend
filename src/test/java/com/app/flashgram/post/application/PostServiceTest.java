@@ -2,34 +2,16 @@ package com.app.flashgram.post.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.app.flashgram.fake.FakeObjectFactory;
-import com.app.flashgram.post.appication.PostService;
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.domain.Post;
-import com.app.flashgram.post.domain.content.PostPublicationState;
-import com.app.flashgram.user.application.UserService;
-import com.app.flashgram.user.application.dto.CreateUserRequestDto;
-import com.app.flashgram.user.domain.User;
 import org.junit.jupiter.api.Test;
 
-class PostServiceTest {
-
-    private final UserService userService = FakeObjectFactory.getUserService();
-    private final PostService postService = FakeObjectFactory.getPostService();
-
-    private final User user = userService.createUser(new CreateUserRequestDto("user1", null));
-    private final User otherUser = userService.createUser(new CreateUserRequestDto("user1", null));
-
-    private final CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test content",
-            PostPublicationState.PUBLIC);
-
-    private final Post post = postService.createPost(dto);
+class PostServiceTest extends PostApplicationTestTemplate {
 
     @Test
     void givenPostRequestDto_whenCreate_thenReturnPost() {
         //when
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
 
         //then
         Post post = postService.getPost(savePost.getId());
@@ -39,10 +21,10 @@ class PostServiceTest {
     @Test
     void givenCreatedPost_whenUpdate_thenReturnUpdatePost() {
         //given
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
 
         //when
-        Post updatePost = postService.updatePost(savePost.getId(), dto);
+        Post updatePost = postService.updatePost(savePost.getId(), postRequestDto);
 
         //then
         assertEquals(savePost.getId(), updatePost.getId());
@@ -53,7 +35,7 @@ class PostServiceTest {
     @Test
     void givenCreatedPost_whenLike_thenReturnPostWithLike() {
         //given
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
@@ -66,7 +48,7 @@ class PostServiceTest {
     @Test
     void givenCreatedPost_whenLikeTwice_thenReturnPostWitLike() {
         //given
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
@@ -80,7 +62,7 @@ class PostServiceTest {
     @Test
     void givenCreatedPostLiked_whenUnliked_thenReturnPostWithUnlike() {
         //given
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
         postService.likePost(likeRequestDto);
 
@@ -94,7 +76,7 @@ class PostServiceTest {
     @Test
     void givenCreatedPost_whenUnliked_thenReturnPostWithoutLike() {
         //given
-        Post savePost = postService.createPost(dto);
+        Post savePost = postService.createPost(postRequestDto);
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
