@@ -2,7 +2,6 @@ package com.app.flashgram.post.appication;
 
 import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
-import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
@@ -56,7 +55,7 @@ public class PostService {
      * @param dto 게시글 수정 요청 정보
      * @return 수정된 게시글
      */
-    public Post updatePost(Long id, UpdatePostRequestDto dto) {
+    public Post updatePost(Long id, CreatePostRequestDto dto) {
         Post post = getPost(id);
         User user = userService.getUser(dto.userId());
 

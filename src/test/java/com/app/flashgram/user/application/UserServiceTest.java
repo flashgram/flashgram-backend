@@ -2,11 +2,10 @@ package com.app.flashgram.user.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.app.flashgram.fake.FakeObjectFactory;
 import com.app.flashgram.user.application.dto.CreateUserRequestDto;
-import com.app.flashgram.user.application.interfaces.UserRepository;
 import com.app.flashgram.user.domain.User;
 import com.app.flashgram.user.domain.UserInfo;
-import com.app.flashgram.user.repository.FakeUserRepository;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,8 +14,7 @@ import org.junit.jupiter.api.Test;
  */
 class UserServiceTest {
 
-    private final UserRepository userRepository = new FakeUserRepository();
-    private final UserService userService = new UserService(userRepository);
+    private final UserService userService = FakeObjectFactory.getUserService();
 
     /**
      * 유저 생성 후 조회 기능을 테스트
