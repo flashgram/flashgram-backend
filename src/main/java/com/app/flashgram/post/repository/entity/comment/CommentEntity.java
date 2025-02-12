@@ -5,7 +5,7 @@ import com.app.flashgram.common.repository.entity.TimeBaseEntity;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.domain.content.CommentContent;
 import com.app.flashgram.post.repository.entity.post.PostEntity;
-import com.app.flashgram.user.repository.user.UserEntity;
+import com.app.flashgram.user.repository.entity.UserEntity;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;

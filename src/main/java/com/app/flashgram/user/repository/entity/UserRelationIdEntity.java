@@ -1,4 +1,4 @@
-package com.app.flashgram.user.repository.user;
+package com.app.flashgram.user.repository.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

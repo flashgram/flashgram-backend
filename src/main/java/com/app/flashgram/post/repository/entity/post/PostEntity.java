@@ -5,7 +5,7 @@ import com.app.flashgram.common.repository.entity.TimeBaseEntity;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.content.PostContent;
 import com.app.flashgram.post.domain.content.PostPublicationState;
-import com.app.flashgram.user.repository.user.UserEntity;
+import com.app.flashgram.user.repository.entity.UserEntity;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
