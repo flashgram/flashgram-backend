@@ -1,4 +1,4 @@
-package com.app.flashgram.post.repository.entity;
+package com.app.flashgram.post.repository.entity.post;
 
 import com.app.flashgram.post.domain.content.PostPublicationState;
 import jakarta.persistence.AttributeConverter;
