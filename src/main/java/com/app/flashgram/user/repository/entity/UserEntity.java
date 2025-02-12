@@ -12,12 +12,14 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "fg_user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@DynamicUpdate
 public class UserEntity extends TimeBaseEntity {
 
     @Id

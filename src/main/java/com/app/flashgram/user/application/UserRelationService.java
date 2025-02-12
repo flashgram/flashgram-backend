@@ -3,11 +3,13 @@ package com.app.flashgram.user.application;
 import com.app.flashgram.user.application.dto.FollowUserRequestDto;
 import com.app.flashgram.user.application.interfaces.UserRelationRepository;
 import com.app.flashgram.user.domain.User;
+import org.springframework.stereotype.Service;
 
 /**
  * 유저 간의 팔로우 관계를 관리 서비스 클래스
  * 팔로우 및 언팔로우 기능
  */
+@Service
 public class UserRelationService {
 
     private final UserService userService;

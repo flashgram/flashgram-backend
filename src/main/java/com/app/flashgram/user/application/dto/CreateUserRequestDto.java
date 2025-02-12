@@ -1,6 +1,6 @@
 package com.app.flashgram.user.application.dto;
 
-public record CreateUserRequestDto(String name, String ProfileImg) {
+public record CreateUserRequestDto(String name, String profileImg) {
 
 }
 
