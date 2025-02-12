@@ -4,7 +4,6 @@ import com.app.flashgram.user.application.interfaces.UserRepository;
 import com.app.flashgram.user.domain.User;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * 테스트 목적의 인메모리 유저 저장소 구현체
@@ -44,7 +43,7 @@ public class FakeUserRepository implements UserRepository {
      *         유저가 존재하지 않는 경우 빈 Optional 반환
      */
     @Override
-    public Optional<User> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public User findById(Long id) {
+        return store.get(id);
     }
 }

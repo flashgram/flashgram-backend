@@ -1,4 +1,4 @@
-package com.app.flashgram.user.repository.user;
+package com.app.flashgram.user.repository.entity;
 
 import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import com.app.flashgram.common.repository.entity.TimeBaseEntity;
