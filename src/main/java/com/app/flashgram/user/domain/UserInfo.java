@@ -1,8 +1,11 @@
 package com.app.flashgram.user.domain;
 
+import lombok.Getter;
+
 /**
  * 유저의 기본 정보를 표현하는 값 객체
  */
+@Getter
 public class UserInfo {
 
     private final String name;
@@ -23,10 +26,6 @@ public class UserInfo {
 
         this.name = name;
         this.profileImgUrl = profileImgUrl;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getProfileImgUrl() {

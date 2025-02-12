@@ -2,16 +2,22 @@ package com.app.flashgram.user.domain;
 
 import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 /**
  * 유저 도메인 객체
  */
+@Getter
+@Builder
+@AllArgsConstructor
 public class User {
 
-    private final Long id;
-    private final UserInfo userInfo;
-    private final PositiveIntegerCounter followingCount;
-    private final PositiveIntegerCounter followerCounter;
+    private Long id;
+    private UserInfo userInfo;
+    private PositiveIntegerCounter followingCount;
+    private PositiveIntegerCounter followerCounter;
 
     /**
      * 유저 도메인 객체 생성
@@ -109,11 +115,11 @@ public class User {
         return followingCount.getCount();
     }
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return userInfo.getName();
     }
 
-    public UserInfo getInfo() {
-        return userInfo;
+    public String getProfileImgUrl() {
+        return userInfo.getProfileImgUrl();
     }
 }
