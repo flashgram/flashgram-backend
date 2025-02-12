@@ -5,10 +5,16 @@ import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.content.CommentContent;
 import com.app.flashgram.post.domain.content.Content;
 import com.app.flashgram.user.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 /**
  * 댓글 도메인 객체
  */
+@AllArgsConstructor
+@Getter
+@Builder
 public class Comment {
 
     private final Long id;
@@ -94,18 +100,6 @@ public class Comment {
 
     public String getContent() {
         return content.getContentText();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Post getPost() {
-        return post;
-    }
-
-    public User getAuthor() {
-        return author;
     }
 
     public Content getContentObject() {

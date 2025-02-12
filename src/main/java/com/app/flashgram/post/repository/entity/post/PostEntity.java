@@ -1,4 +1,4 @@
-package com.app.flashgram.post.repository.entity;
+package com.app.flashgram.post.repository.entity.post;
 
 import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import com.app.flashgram.common.repository.entity.TimeBaseEntity;
@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "post")
+@Table(name = "fg_post")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
