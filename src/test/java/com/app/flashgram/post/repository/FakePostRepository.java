@@ -4,7 +4,6 @@ import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class FakePostRepository implements PostRepository {
 
@@ -24,7 +23,7 @@ public class FakePostRepository implements PostRepository {
     }
 
     @Override
-    public Optional<Post> findById(Long id) {
-        return Optional.ofNullable(store.get(id));
+    public Post findById(Long id) {
+        return store.get(id);
     }
 }
