@@ -22,5 +22,4 @@ public class UserRelationEntity extends TimeBaseEntity {
 
     @Id
     public Long followingUserId;
-
 }

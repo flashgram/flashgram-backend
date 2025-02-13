@@ -2,15 +2,18 @@ package com.app.flashgram.post.appication;
 
 import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
+import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
+import org.springframework.stereotype.Service;
 
 /**
  * 게시글 관련 비즈니스 로직을 처리하는 서비스 클래스
  */
+@Service
 public class PostService {
 
     private final UserService userService;
@@ -32,7 +35,7 @@ public class PostService {
      * @throws IllegalArgumentException 게시글이 존재하지 않는 경우
      */
     public Post getPost(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
+        return postRepository.findById(id);
     }
 
     /**
@@ -51,12 +54,12 @@ public class PostService {
     /**
      * 기존 게시글 수정
      *
-     * @param id 수정할 게시글 ID
+     * @param postId 수정할 게시글 ID
      * @param dto 게시글 수정 요청 정보
      * @return 수정된 게시글
      */
-    public Post updatePost(Long id, CreatePostRequestDto dto) {
-        Post post = getPost(id);
+    public Post updatePost(Long postId, UpdatePostRequestDto dto) {
+        Post post = getPost(postId);
         User user = userService.getUser(dto.userId());
 
         post.updatePost(user, dto.content(), dto.state());

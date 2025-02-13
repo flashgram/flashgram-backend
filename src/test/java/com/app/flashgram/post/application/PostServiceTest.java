@@ -3,7 +3,9 @@ package com.app.flashgram.post.application;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
+import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.domain.Post;
+import com.app.flashgram.post.domain.content.PostPublicationState;
 import org.junit.jupiter.api.Test;
 
 class PostServiceTest extends PostApplicationTestTemplate {
@@ -21,15 +23,16 @@ class PostServiceTest extends PostApplicationTestTemplate {
     @Test
     void givenCreatedPost_whenUpdate_thenReturnUpdatePost() {
         //given
-        Post savePost = postService.createPost(postRequestDto);
+        Post savedPost = postService.createPost(postRequestDto);
 
         //when
-        Post updatePost = postService.updatePost(savePost.getId(), postRequestDto);
+        UpdatePostRequestDto updatePostDto = new UpdatePostRequestDto(user.getId(), "updated-content", PostPublicationState.PRIVATE);
+        Post updatePost = postService.updatePost(savedPost.getId(), updatePostDto);
 
         //then
-        assertEquals(savePost.getId(), updatePost.getId());
-        assertEquals(savePost.getAuthor(), updatePost.getAuthor());
-        assertEquals(savePost.getContent(), updatePost.getContent());
+        assertEquals(savedPost.getId(), updatePost.getId());
+        assertEquals(savedPost.getAuthor(), updatePost.getAuthor());
+        assertEquals(savedPost.getContent(), updatePost.getContent());
     }
 
     @Test

@@ -32,7 +32,7 @@ public class PostEntity extends TimeBaseEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT ))
+    @JoinColumn(name = "author_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private UserEntity author;
 
     private String content;
