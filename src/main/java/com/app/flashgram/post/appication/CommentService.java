@@ -9,11 +9,13 @@ import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
+import org.springframework.stereotype.Service;
 
 /**
  * 댓글 관련 비즈니스 로직 처리 서비스 클래스
  * 댓글의 생성, 수정 및 좋아요 기능 제공
  */
+@Service
 public class CommentService {
 
     private final UserService userService;
@@ -29,7 +31,7 @@ public class CommentService {
     }
 
     public Comment getComment(Long id) {
-        return commentRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return commentRepository.findById(id);
     }
 
     /**
@@ -52,8 +54,8 @@ public class CommentService {
      * @param dto 댓글 수정에 필요한 정보를 담은 DTO
      * @return 수정된 댓글 객체
      */
-    public Comment updateComment(UpdateCommentRequestDto dto) {
-        Comment comment = getComment(dto.commentId());
+    public Comment updateComment(Long commentId, UpdateCommentRequestDto dto) {
+        Comment comment = getComment(commentId);
         User user = userService.getUser(dto.userId());
 
         comment.updateComment(user, dto.content());
