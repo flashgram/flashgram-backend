@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 public class UserRelationEntity extends TimeBaseEntity {
 
     @Id
-    public Long followerUserId;
+    public Long followingUserId;
 
     @Id
-    public Long followingUserId;
+    public Long followerUserId;
 }

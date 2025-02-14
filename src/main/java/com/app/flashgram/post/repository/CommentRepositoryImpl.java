@@ -1,9 +1,11 @@
 package com.app.flashgram.post.repository;
 
 import com.app.flashgram.post.appication.interfaces.CommentRepository;
+import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.repository.entity.comment.CommentEntity;
 import com.app.flashgram.post.repository.jpa.JpaCommentRepository;
+import com.app.flashgram.post.repository.jpa.JpaPostRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Repository;
 public class CommentRepositoryImpl implements CommentRepository {
 
     private final JpaCommentRepository jpaCommentRepository;
+    private final JpaPostRepository jpaPostRepository;
 
     /**
      * 댓글을 저장하거나 업데이트
@@ -28,6 +31,8 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     @Transactional
     public Comment save(Comment comment) {
+
+        Post targetPost = comment.getPost();
         CommentEntity commentEntity = new CommentEntity(comment);
 
         if (comment.getId() != null) {
@@ -35,6 +40,7 @@ public class CommentRepositoryImpl implements CommentRepository {
         }
 
         commentEntity = jpaCommentRepository.save(commentEntity);
+        jpaPostRepository.increaseCommentCount(targetPost.getId());
 
         return commentEntity.toComment();
     }

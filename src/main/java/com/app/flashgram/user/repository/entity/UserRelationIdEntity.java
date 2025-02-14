@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserRelationIdEntity {
 
-    public Long followerUserId;
     public Long followingUserId;
+    public Long followerUserId;
 }
