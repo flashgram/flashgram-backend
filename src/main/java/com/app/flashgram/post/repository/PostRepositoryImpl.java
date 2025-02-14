@@ -4,6 +4,7 @@ import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.repository.entity.post.PostEntity;
 import com.app.flashgram.post.repository.jpa.JpaPostRepository;
+import com.app.flashgram.post.repository.post_queue.UserPostQueueCommandRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Repository;
 public class PostRepositoryImpl implements PostRepository {
 
     private final JpaPostRepository jpaPostRepository;
+    private final UserPostQueueCommandRepository commandRepository;
 
     /**
      * Post 객체 저장하거나 업데이트
@@ -35,10 +37,10 @@ public class PostRepositoryImpl implements PostRepository {
             return postEntity.toPost();
         }
 
-        PostEntity entity = new PostEntity(post);
-        entity = jpaPostRepository.save(entity);
+        postEntity = jpaPostRepository.save(postEntity);
+        commandRepository.publishPost(postEntity);
 
-        return entity.toPost();
+        return postEntity.toPost();
     }
 
     @Override

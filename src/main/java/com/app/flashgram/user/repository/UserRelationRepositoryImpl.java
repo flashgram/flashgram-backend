@@ -1,5 +1,6 @@
 package com.app.flashgram.user.repository;
 
+import com.app.flashgram.post.repository.post_queue.UserPostQueueCommandRepository;
 import com.app.flashgram.user.application.interfaces.UserRelationRepository;
 import com.app.flashgram.user.domain.User;
 import com.app.flashgram.user.repository.entity.UserEntity;
@@ -22,6 +23,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
     private final JpaUserRelationRepository jpaUserRelationRepository;
     private final JpaUserRepository jpaUserRepository;
+    private final UserPostQueueCommandRepository commandRepository;
 
     /**
      * 특정 유저가 다른 유저를 이미 팔로우하고 있는지 확인
@@ -51,6 +53,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
         jpaUserRelationRepository.save(entity);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        commandRepository.saveFollowPost(user.getId(), targetUser.getId());
     }
 
     /**
@@ -67,5 +70,6 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
         jpaUserRelationRepository.deleteById(id);
         jpaUserRepository.saveAll(List.of(new UserEntity(user), new UserEntity(targetUser)));
+        commandRepository.deleteUnfollowPost(user.getId(), targetUser.getId());
     }
 }
