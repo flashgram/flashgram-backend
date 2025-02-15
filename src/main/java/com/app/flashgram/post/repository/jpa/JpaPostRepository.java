@@ -30,14 +30,15 @@ public interface JpaPostRepository extends JpaRepository<PostEntity, Long> {
      * 게시물의 좋아요 수 업데이트
      * 업데이트 시 수정 시간(updAt)이 현재 시간으로 자동 설정
      *
-     * @param postEntity 업데이트할 좋아요 수가 담긴 게시물 엔티티
+     * @param postId
+     * @param likeCount
      */
     @Modifying
     @Query(value = "UPDATE PostEntity p "
-            + "SET p.likeCount = :#{#postEntity.likeCount}, "
+            + "SET p.likeCount = p.likeCount + :likeCount, "
             + "p.updAt = now() "
-            + "WHERE p.id = :#{#postEntity.getId()}")
-    void updateLikeCount(PostEntity postEntity);
+            + "WHERE p.id = :postId")
+    void updateLikeCount(Long postId, Integer likeCount);
 
     /**
      * 게시물의 댓글 수를 1 증가시키고 수정 시간 업데이트

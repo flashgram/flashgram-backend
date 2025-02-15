@@ -3,9 +3,7 @@ package com.app.flashgram.post.repository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
-import com.app.flashgram.post.repository.entity.comment.CommentEntity;
 import com.app.flashgram.post.repository.entity.like.LikeEntity;
-import com.app.flashgram.post.repository.entity.post.PostEntity;
 import com.app.flashgram.post.repository.jpa.JpaCommentRepository;
 import com.app.flashgram.post.repository.jpa.JpaLikeRepository;
 import com.app.flashgram.post.repository.jpa.JpaPostRepository;
@@ -60,7 +58,7 @@ public class LikeRepositoryImpl implements LikeRepository {
 
         //jpaLikeRepository.save(new LikeEntity(post, user));
         entityManager.persist(likeEntity);
-        jpaPostRepository.updateLikeCount(new PostEntity(post));
+        jpaPostRepository.updateLikeCount(post.getId(), 1);
     }
 
     /**
@@ -76,7 +74,7 @@ public class LikeRepositoryImpl implements LikeRepository {
         LikeEntity likeEntity = new LikeEntity(post, user);
 
         jpaLikeRepository.deleteById(likeEntity.getId());
-        jpaPostRepository.updateLikeCount(new PostEntity(post));
+        jpaPostRepository.updateLikeCount(post.getId(), -1);
     }
 
     /**
@@ -107,7 +105,7 @@ public class LikeRepositoryImpl implements LikeRepository {
 
         //jpaLikeRepository.save(new LikeEntity(comment, user));
         entityManager.persist(likeEntity);
-        jpaCommentRepository.updateLikeCount(new CommentEntity(comment));
+        jpaCommentRepository.updateLikeCount(comment.getId(), 1);
     }
 
     /**
@@ -123,6 +121,6 @@ public class LikeRepositoryImpl implements LikeRepository {
         LikeEntity likeEntity = new LikeEntity(comment, user);
 
         jpaLikeRepository.deleteById(likeEntity.getId());
-        jpaCommentRepository.updateLikeCount(new CommentEntity(comment));
+        jpaCommentRepository.updateLikeCount(comment.getId(), -1);
     }
 }
