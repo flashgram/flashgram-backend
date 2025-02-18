@@ -1,11 +1,11 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.CommentRepository;
+import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.domain.comment.Comment;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FakeCommentRepository implements CommentRepository {
+public class FakeCommentCommandRepository implements CommentCommandRepository {
 
     private Map<Long, Comment> store = new HashMap<>();
 

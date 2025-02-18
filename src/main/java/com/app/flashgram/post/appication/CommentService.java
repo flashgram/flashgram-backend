@@ -3,14 +3,12 @@ package com.app.flashgram.post.appication;
 import com.app.flashgram.post.appication.dto.CreateCommentRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.appication.dto.UpdateCommentRequestDto;
-import com.app.flashgram.post.appication.interfaces.CommentRepository;
+import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
-import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,13 +20,13 @@ public class CommentService {
 
     private final UserService userService;
     private final PostService postService;
-    private final CommentRepository commentRepository;
+    private final CommentCommandRepository CommentCommandRepository;
     private final LikeRepository likeRepository;
 
-    public CommentService(UserService userService, PostService postService, CommentRepository commentRepository, LikeRepository likeRepository) {
+    public CommentService(UserService userService, PostService postService, CommentCommandRepository CommentCommandRepository, LikeRepository likeRepository) {
         this.userService = userService;
         this.postService = postService;
-        this.commentRepository = commentRepository;
+        this.CommentCommandRepository = CommentCommandRepository;
         this.likeRepository = likeRepository;
     }
     /**
@@ -38,7 +36,7 @@ public class CommentService {
      * @return 조회된 댓글 객체
      */
     public Comment getComment(Long id) {
-        return commentRepository.findById(id);
+        return CommentCommandRepository.findById(id);
     }
 
     /**
@@ -49,10 +47,11 @@ public class CommentService {
      * @param userId 댓글을 조회할 유저의 ID
      * @param lastContentId 마지막으로 조회된 댓글 ID (옵션)
      * @return 조회된 댓글 목록
-     */
+
     public List<GetCommentContentResponseDto> getCommentList(Long postId, Long userId, Long lastContentId) {
-        return commentRepository.findByPostId(postId, userId, lastContentId);
-    }
+        return CommentCommandRepository.findByPostId(postId, userId, lastContentId);
+    }*/
+
 
     /**
      * 새로운 댓글을 생성
@@ -65,7 +64,7 @@ public class CommentService {
         User user = userService.getUser(dto.userId());
 
         Comment comment = Comment.createComment(post, user, dto.content());
-        return commentRepository.save(comment);
+        return CommentCommandRepository.save(comment);
     }
 
     /**
@@ -79,7 +78,7 @@ public class CommentService {
         User user = userService.getUser(dto.userId());
 
         comment.updateComment(user, dto.content());
-        return commentRepository.save(comment);
+        return CommentCommandRepository.save(comment);
     }
 
     /**

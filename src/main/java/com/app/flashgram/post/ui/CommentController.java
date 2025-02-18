@@ -5,6 +5,7 @@ import com.app.flashgram.post.appication.CommentService;
 import com.app.flashgram.post.appication.dto.CreateCommentRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.appication.dto.UpdateCommentRequestDto;
+import com.app.flashgram.post.appication.interfaces.CommentQueryRepository;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
     private final CommentService commentService;
+    private final CommentQueryRepository commentQueryRepository;
 
     /**
      * 새로운 댓글 생성
@@ -96,7 +98,7 @@ public class CommentController {
             @PathVariable Long postId,
             @PathVariable(name = "userId") Long userId,
             Long lastCommentId) {
-        List<GetCommentContentResponseDto> response = commentService.getCommentList(postId, userId, lastCommentId);
+        List<GetCommentContentResponseDto> response = commentQueryRepository.findByPostId(postId, userId, lastCommentId);
         return ResponseEntity.ok(response);
     }
 }
