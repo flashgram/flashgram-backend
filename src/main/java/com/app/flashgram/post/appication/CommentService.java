@@ -7,8 +7,10 @@ import com.app.flashgram.post.appication.interfaces.CommentRepository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
+import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,9 +31,27 @@ public class CommentService {
         this.commentRepository = commentRepository;
         this.likeRepository = likeRepository;
     }
-
+    /**
+     * 주어진 댓글 ID를 통해 댓글을 조회
+     *
+     * @param id 조회할 댓글의 ID
+     * @return 조회된 댓글 객체
+     */
     public Comment getComment(Long id) {
         return commentRepository.findById(id);
+    }
+
+    /**
+     * 게시물 ID와 유저 ID를 기준으로 댓글 목록을 조회
+     * 또한, 마지막 댓글 ID(lastContentId)를 통해 페이지네이션을 지원
+     *
+     * @param postId 게시물의 ID
+     * @param userId 댓글을 조회할 유저의 ID
+     * @param lastContentId 마지막으로 조회된 댓글 ID (옵션)
+     * @return 조회된 댓글 목록
+     */
+    public List<GetCommentContentResponseDto> getCommentList(Long postId, Long userId, Long lastContentId) {
+        return commentRepository.findByPostId(postId, userId, lastContentId);
     }
 
     /**
