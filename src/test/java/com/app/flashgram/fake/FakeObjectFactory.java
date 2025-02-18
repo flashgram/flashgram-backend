@@ -2,10 +2,10 @@ package com.app.flashgram.fake;
 
 import com.app.flashgram.post.appication.CommentService;
 import com.app.flashgram.post.appication.PostService;
-import com.app.flashgram.post.appication.interfaces.CommentRepository;
+import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.appication.interfaces.PostRepository;
-import com.app.flashgram.post.repository.FakeCommentRepository;
+import com.app.flashgram.post.repository.FakeCommentCommandRepository;
 import com.app.flashgram.post.repository.FakeLikeRepository;
 import com.app.flashgram.post.repository.FakePostRepository;
 import com.app.flashgram.user.application.UserRelationService;
@@ -22,12 +22,13 @@ public class FakeObjectFactory {
 
     private static final PostRepository fakePostRepository = new FakePostRepository();
     private static final LikeRepository fakeLikeRepository = new FakeLikeRepository();
-    private static final CommentRepository fakeCommentRepository = new FakeCommentRepository();
+    private static final CommentCommandRepository FAKE_COMMENT_COMMAND_REPOSITORY = new FakeCommentCommandRepository();
 
     private static final UserService userService = new UserService(fakeUserRepository);
     private static final UserRelationService userRelationService = new UserRelationService(userService, fakeUserRelationRepository);
     private static final PostService postService = new PostService(userService, fakePostRepository, fakeLikeRepository);
-    private static final CommentService commentService = new CommentService(userService, postService, fakeCommentRepository, fakeLikeRepository);
+    private static final CommentService commentService = new CommentService(userService, postService,
+            FAKE_COMMENT_COMMAND_REPOSITORY, fakeLikeRepository);
 
     private FakeObjectFactory() {}
 

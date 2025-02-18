@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.CommentRepository;
+import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.repository.entity.comment.CommentEntity;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @RequiredArgsConstructor
-public class CommentRepositoryImpl implements CommentRepository {
+public class CommentCommandRepositoryImpl implements CommentCommandRepository {
 
     private final JpaCommentRepository jpaCommentRepository;
     private final JpaPostRepository jpaPostRepository;
@@ -45,6 +45,12 @@ public class CommentRepositoryImpl implements CommentRepository {
         return commentEntity.toComment();
     }
 
+    /**
+     * 댓글 ID로 댓글을 조회
+     *
+     * @param id 조회할 댓글의 ID
+     * @return 댓글 객체
+     */
     @Override
     public Comment findById(Long id) {
         CommentEntity commentEntity = jpaCommentRepository.findById(id).orElseThrow(IllegalArgumentException::new);
