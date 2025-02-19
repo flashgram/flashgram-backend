@@ -36,6 +36,10 @@ public class User {
         this.followerCounter = new PositiveIntegerCounter();
     }
 
+    public User(String name, String profileImgUrl) {
+        this(null, new UserInfo(name, profileImgUrl));
+    }
+
     /**
      * 지정된 유저 팔로우
      * 팔로우 시 자신의 팔로잉 수와 대상 유저의 팔로워 수가 증가

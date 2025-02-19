@@ -4,6 +4,7 @@ import com.app.flashgram.auth.appliction.interfaces.EmailVerificationRepository;
 import com.app.flashgram.auth.domain.Email;
 import com.app.flashgram.auth.repositiry.entity.EmailVerificationEntity;
 import com.app.flashgram.auth.repositiry.jpa.JpaEmailVerificationRepository;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,7 @@ public class EmailVerificationRepositoryImpl implements EmailVerificationReposit
      * @throws IllegalArgumentException 이미 인증된 이메일인 경우
      */
     @Override
+    @Transactional
     public void createEmailVerification(Email email, String token) {
         String emailAddress = email.getEmailText();
         Optional<EmailVerificationEntity> entity = jpaEmailVerificationRepository.findByEmail(emailAddress);
@@ -46,5 +48,49 @@ public class EmailVerificationRepositoryImpl implements EmailVerificationReposit
         EmailVerificationEntity emailVerificationEntity = new EmailVerificationEntity(emailAddress, token);
 
         jpaEmailVerificationRepository.save(emailVerificationEntity);
+    }
+
+    /**
+     * 이메일과 토큰을 검증하여 이메일 인증
+     * 다음의 경우에 예외가 발생합니다:
+     * - 인증을 요청하지 않은 이메일인 경우
+     * - 이미 인증된 이메일인 경우
+     * - 토큰이 일치하지 않는 경우
+     *
+     * @param email 인증할 이메일 주소
+     * @param token 인증 토큰
+     * @throws IllegalArgumentException 인증 실패 시 발생 (미요청 이메일, 이미 인증됨, 잘못된 토큰)
+     */
+    @Override
+    @Transactional
+    public void verifyEmail(Email email, String token) {
+        String emailAddress = email.getEmailText();
+
+        EmailVerificationEntity entity = jpaEmailVerificationRepository.findByEmail(emailAddress)
+                                                                       .orElseThrow(() -> new IllegalArgumentException("인증을 요청하지 않은 이메일입니다."));
+
+        if (entity.isVerified()) {
+            throw new IllegalArgumentException("이미 인증된 이메일입니다.");
+        }
+
+        if (!entity.hasSameToken(token)) {
+            throw new IllegalArgumentException("토큰 값이 유효하지 않습니다.");
+        }
+
+        entity.verify();
+    }
+
+    /**
+     * 주어진 이메일의 인증 완료 여부 확인
+     *
+     * @param email 확인할 이메일 주소
+     * @return 이메일 인증 완료 여부
+     * @throws IllegalArgumentException 인증을 요청하지 않은 이메일인 경우 발생
+     */
+    @Override
+    public boolean isEmailVerified(Email email) {
+        EmailVerificationEntity entity = jpaEmailVerificationRepository.findByEmail(email.getEmailText())
+                                                                         .orElseThrow(() -> new IllegalArgumentException("인증을 요청하지 않은 이메일입니다."));
+        return entity.isVerified();
     }
 }

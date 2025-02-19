@@ -30,4 +30,16 @@ public class EmailService {
         emailSendRepository.sendEmail(email, token);
         emailVerificationRepository.createEmailVerification(email, token);
     }
+
+    /**
+     * 이메일과 토큰을 검증하여 이메일 인증 처리
+     *
+     * @param email 인증할 이메일 주소
+     * @param token 이메일 인증을 위한 토큰
+     */
+    public void verifyEmail(String email, String token) {
+        Email emailValue = Email.createEmail(email);
+
+        emailVerificationRepository.verifyEmail(emailValue, token);
+    }
 }
