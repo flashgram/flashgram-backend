@@ -1,9 +1,12 @@
 package com.app.flashgram.auth.appliction;
 
 import com.app.flashgram.auth.appliction.dto.CreateUserAuthRequestDto;
+import com.app.flashgram.auth.appliction.dto.LoginRequestDto;
+import com.app.flashgram.auth.appliction.dto.UserAccessTokenResponseDto;
 import com.app.flashgram.auth.appliction.interfaces.EmailVerificationRepository;
 import com.app.flashgram.auth.appliction.interfaces.UserAuthRepository;
 import com.app.flashgram.auth.domain.Email;
+import com.app.flashgram.auth.domain.TokenProvider;
 import com.app.flashgram.auth.domain.UserAuth;
 import com.app.flashgram.user.domain.User;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ public class AuthService {
 
     private final UserAuthRepository userAuthRepository;
     private final EmailVerificationRepository emailVerificationRepository;
+    private final TokenProvider tokenProvider;
 
     /**
      * 유저 등록 메소드
@@ -41,4 +45,10 @@ public class AuthService {
         return userAuth.getUserId();
     }
 
+    public UserAccessTokenResponseDto login(LoginRequestDto dto){
+        UserAuth userAuth = userAuthRepository.loginUser(dto.email(), dto.password());
+        String token = tokenProvider.createToken(userAuth.getUserId(), userAuth.getUserRole());
+
+        return new UserAccessTokenResponseDto(token);
+    }
 }

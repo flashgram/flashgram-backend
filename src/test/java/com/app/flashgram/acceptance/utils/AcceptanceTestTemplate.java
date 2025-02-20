@@ -1,5 +1,8 @@
 package com.app.flashgram.acceptance.utils;
 
+import static com.app.flashgram.acceptance.steps.LoginAcceptanceSteps.requestLoginGetToken;
+
+import com.app.flashgram.auth.appliction.dto.LoginRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,14 +30,26 @@ public class AcceptanceTestTemplate {
     }
 
     protected String getEmailToken(String email) {
+
         return loader.getEmailToken(email);
     }
 
     protected boolean isEmailVerified(String email) {
+
         return loader.isEmailVerified(email);
     }
 
     protected Long getUserId(String email) {
+
         return loader.getUserId(email);
+    }
+
+    protected void createUser(String email) {
+        loader.createUser(email);
+    }
+
+    protected String login(String email) {
+
+        return requestLoginGetToken(new LoginRequestDto(email, "password"));
     }
 }

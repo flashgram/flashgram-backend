@@ -27,6 +27,14 @@ public class Password {
         return new Password(SHA256.encrypt(password));
     }
 
+    public static Password createPassword(String password) {
+        if (password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("패스워드는 빈 값이 될 수 없습니다.");
+        }
+
+        return new Password(password);
+    }
+
     /**
      * 주어진 평문 비밀번호가 현재 암호화된 비밀번호와 일치하는지 검증
      *
@@ -34,7 +42,7 @@ public class Password {
      * @return 비밀번호 일치 여부
      */
     public boolean matchPassword(String password) {
-        return encryptPassword.matches(SHA256.encrypt(password));
+        return encryptPassword.equals(SHA256.encrypt(password));
     }
 
     public String getEncryptPassword() {
