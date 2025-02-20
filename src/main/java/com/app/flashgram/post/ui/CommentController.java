@@ -1,5 +1,7 @@
 package com.app.flashgram.post.ui;
 
+import com.app.flashgram.common.principal.AuthPrincipal;
+import com.app.flashgram.common.principal.UserPrincipal;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.post.appication.CommentService;
 import com.app.flashgram.post.appication.dto.CreateCommentRequestDto;
@@ -99,6 +101,25 @@ public class CommentController {
             @PathVariable(name = "userId") Long userId,
             Long lastCommentId) {
         List<GetCommentContentResponseDto> response = commentQueryRepository.findByPostId(postId, userId, lastCommentId);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 게시물에 대한 댓글 목록을 조회하는 API
+     * 인증된 사용자의 ID를 기반으로 댓글 목록을 조회하고, 해당 댓글의 정보를 응답으로 반환
+     *
+     * @param postId 조회할 게시물의 ID
+     * @param userPrincipal 인증된 사용자 정보
+     * @param lastCommentId 마지막으로 조회한 댓글의 ID (optional)
+     * @return 댓글 목록을 포함한 응답
+     */
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<GetCommentContentResponseDto>> getCommentList(
+            @PathVariable Long postId,
+            @AuthPrincipal UserPrincipal userPrincipal,
+            Long lastCommentId) {
+        List<GetCommentContentResponseDto> response = commentQueryRepository.findByPostId(postId, userPrincipal.getUserId(), lastCommentId);
+
         return ResponseEntity.ok(response);
     }
 }

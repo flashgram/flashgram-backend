@@ -38,4 +38,25 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
 
         return userAuthEntity.toUserAuth();
     }
+
+    /**
+     * 유저의 로그인 기능을 처리
+     *
+     * @param email 유저의 이메일
+     * @param password 유저의 비밀번호
+     * @return 유저 인증 정보
+     * @throws IllegalArgumentException 비밀번호가 일치하지 않을 경우 발생
+     */
+    @Override
+    public UserAuth loginUser(String email, String password) {
+        UserAuthEntity entity = jpaUserAuthRepository.findById(email).orElseThrow();
+        UserAuth userAuth = entity.toUserAuth();
+
+        if (!userAuth.matchPassword(password)) {
+
+            throw new IllegalArgumentException("옳지 않은 비밀번호입니다.");
+        }
+
+        return userAuth;
+    }
 }
