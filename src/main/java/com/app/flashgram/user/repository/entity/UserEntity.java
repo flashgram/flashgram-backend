@@ -4,15 +4,18 @@ import com.app.flashgram.common.domain.PositiveIntegerCounter;
 import com.app.flashgram.common.repository.entity.TimeBaseEntity;
 import com.app.flashgram.user.domain.User;
 import com.app.flashgram.user.domain.UserInfo;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Table(name = "fg_user")
@@ -29,6 +32,10 @@ public class UserEntity extends TimeBaseEntity {
     private String profileImageUrl;
     private Integer followerCount;
     private Integer followingCount;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDate regDate;
 
     public UserEntity(User user) {
         this.id = user.getId();

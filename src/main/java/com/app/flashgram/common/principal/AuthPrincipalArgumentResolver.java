@@ -9,7 +9,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 /**
  * AuthPrincipal 애너테이션을 처리하는 메서드 인자 해석기
- * 요청의 인증 정보를 기반으로 사용자 정보를 주입
+ * 요청의 인증 정보를 기반으로 유저 정보를 주입
  */
 public class AuthPrincipalArgumentResolver implements HandlerMethodArgumentResolver {
 
@@ -32,13 +32,13 @@ public class AuthPrincipalArgumentResolver implements HandlerMethodArgumentResol
     }
 
     /**
-     * 인증된 사용자 정보를 해석하여 반환
+     * 인증된 유저 정보를 해석하여 반환
      *
      * @param parameter 메서드 매개변수 정보
      * @param mavContainer 모델과 뷰 컨테이너
      * @param webRequest 웹 요청 정보
      * @param binderFactory 데이터 바인딩 팩토리
-     * @return 사용자 정보를 담고 있는 UserPrincipal 객체
+     * @return 유저 정보를 담고 있는 UserPrincipal 객체
      * @throws IllegalArgumentException 인증 토큰이 유효하지 않은 경우 발생
      */
     @Override

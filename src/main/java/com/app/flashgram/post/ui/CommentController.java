@@ -106,10 +106,10 @@ public class CommentController {
 
     /**
      * 게시물에 대한 댓글 목록을 조회하는 API
-     * 인증된 사용자의 ID를 기반으로 댓글 목록을 조회하고, 해당 댓글의 정보를 응답으로 반환
+     * 인증된 유저의 ID를 기반으로 댓글 목록을 조회하고, 해당 댓글의 정보를 응답으로 반환
      *
      * @param postId 조회할 게시물의 ID
-     * @param userPrincipal 인증된 사용자 정보
+     * @param userPrincipal 인증된 유저 정보
      * @param lastCommentId 마지막으로 조회한 댓글의 ID (optional)
      * @return 댓글 목록을 포함한 응답
      */
