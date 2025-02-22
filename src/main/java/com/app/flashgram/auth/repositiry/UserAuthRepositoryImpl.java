@@ -48,6 +48,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
      * @throws IllegalArgumentException 비밀번호가 일치하지 않을 경우 발생
      */
     @Override
+    @Transactional
     public UserAuth loginUser(String email, String password) {
         UserAuthEntity entity = jpaUserAuthRepository.findById(email).orElseThrow();
         UserAuth userAuth = entity.toUserAuth();
@@ -56,6 +57,8 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
 
             throw new IllegalArgumentException("옳지 않은 비밀번호입니다.");
         }
+
+        entity.updateLastLoginDt();
 
         return userAuth;
     }

@@ -1,6 +1,6 @@
 package com.app.flashgram.admin.ui.query;
 
-import com.app.flashgram.admin.ui.dto.GetDailyUserResponseDto;
+import com.app.flashgram.admin.ui.dto.Users.GetDailyUserResponseDto;
 import java.util.List;
 
 /**
