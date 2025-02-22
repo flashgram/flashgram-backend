@@ -1,6 +1,6 @@
 package com.app.flashgram.admin.ui.dto;
 
-import java.time.LocalDate;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetDailyUserResponseDto {
+public class GetTableListResponse<T> {
 
-    private LocalDate regDate;
-    private Long count;
+    private int totalCount;
+    private List<T> tableData;
 }
