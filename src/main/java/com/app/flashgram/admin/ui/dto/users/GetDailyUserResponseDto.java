@@ -1,4 +1,4 @@
-package com.app.flashgram.admin.ui.dto.Users;
+package com.app.flashgram.admin.ui.dto.users;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package com.app.flashgram.admin.ui.dto.Users;
+package com.app.flashgram.admin.ui.dto.comments;
 
 import com.app.flashgram.common.utils.TimeCalculator;
 import java.time.LocalDateTime;
@@ -10,32 +10,31 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetUserTableResponseDto {
-
+public class GetCommentTableResponseDto {
     @Getter
-    private Long id;
+    private Long commentId;
     @Getter
-    private String email;
+    private Long userId;
     @Getter
-    private String name;
+    private String userName;
     @Getter
-    private String role;
+    private Long postId;
+    private String content;
     private LocalDateTime regAt;
     private LocalDateTime updAt;
-    private LocalDateTime lastLoginDt;
+
+    public String getContent() {
+        if (content.length() > 10) {
+            return content.substring(0, 10) + "...";
+        }
+        return content;
+    }
 
     public String getRegAt() {
-
         return TimeCalculator.getFormattedDate(regAt);
     }
 
     public String getUpdAt() {
-
         return TimeCalculator.getFormattedDate(updAt);
-    }
-
-    public String getLastLoginAt() {
-
-        return TimeCalculator.getFormattedDate(lastLoginDt);
     }
 }
