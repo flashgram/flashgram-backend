@@ -1,6 +1,6 @@
 package com.app.flashgram.admin.repository;
 
-import com.app.flashgram.admin.ui.dto.Users.GetDailyUserResponseDto;
+import com.app.flashgram.admin.ui.dto.users.GetDailyUserResponseDto;
 import com.app.flashgram.admin.ui.query.UserStatsQueryRepository;
 import com.app.flashgram.common.utils.TimeCalculator;
 import com.app.flashgram.user.repository.entity.QUserEntity;

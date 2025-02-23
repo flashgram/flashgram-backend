@@ -1,4 +1,4 @@
-package com.app.flashgram.admin.ui.dto.Users;
+package com.app.flashgram.admin.ui.dto.users;
 
 import com.app.flashgram.common.domain.Pageable;
 import lombok.AllArgsConstructor;
