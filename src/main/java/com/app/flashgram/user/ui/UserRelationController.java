@@ -1,5 +1,6 @@
 package com.app.flashgram.user.ui;
 
+import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.user.application.UserRelationService;
 import com.app.flashgram.user.application.dto.FollowUserRequestDto;
@@ -27,6 +28,7 @@ public class UserRelationController {
      * @param dto 팔로우할 유저와 팔로우를 요청하는 유저의 정보를 담은 DTO
      * @return 응답 객체 (데이터 없음)
      */
+    @Idempotent
     @PostMapping("/follow")
     public Response<Void> followUser(@RequestBody FollowUserRequestDto dto) {
         relationService.follow(dto);
@@ -41,6 +43,7 @@ public class UserRelationController {
      * @param dto 언팔로우할 유저와 언팔로우를 요청하는 유저의 정보를 담은 DTO
      * @return 응답 객체 (데이터 없음)
      */
+    @Idempotent
     @PostMapping("/unfollow")
     public Response<Void> unfollowUser(@RequestBody FollowUserRequestDto dto) {
         relationService.unfollow(dto);

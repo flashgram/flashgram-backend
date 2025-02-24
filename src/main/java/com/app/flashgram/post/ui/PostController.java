@@ -1,5 +1,6 @@
 package com.app.flashgram.post.ui;
 
+import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.post.appication.PostService;
 import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
@@ -31,6 +32,7 @@ public class PostController {
      * @param dto 게시물 생성에 필요한 정보를 담은 DTO
      * @return 생성된 게시물의 ID
      */
+    @Idempotent
     @PostMapping
     public Response<Long> createPost(@RequestBody CreatePostRequestDto dto) {
         Post post = postService.createPost(dto);
@@ -45,6 +47,7 @@ public class PostController {
      * @param dto 게시물 수정에 필요한 정보를 담은 DTO
      * @return 수정된 게시물의 ID
      */
+    @Idempotent
     @PatchMapping("/{postId}")
     public Response<Long> updatePost(@PathVariable(name = "postId") Long postId, @RequestBody UpdatePostRequestDto dto) {
         Post post = postService.updatePost(postId, dto);
@@ -59,6 +62,7 @@ public class PostController {
      * @param dto 좋아요할 게시물과 유저 정보를 담은 DTO
      * @return 응답 객체 (데이터 없음)
      */
+    @Idempotent
     @PostMapping("/like")
     public Response<Void> likePost(@RequestBody LikeRequestDto dto) {
         postService.likePost(dto);
@@ -73,6 +77,7 @@ public class PostController {
      * @param dto 좋아요를 취소할 게시물과 유저 정보를 담은 DTO
      * @return 응답 객체 (데이터 없음)
      */
+    @Idempotent
     @PostMapping("/unlike")
     public Response<Void> unlikePost(@RequestBody LikeRequestDto dto) {
         postService.unlikePost(dto);

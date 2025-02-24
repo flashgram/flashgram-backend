@@ -1,5 +1,6 @@
 package com.app.flashgram.user.ui;
 
+import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.application.dto.CreateUserRequestDto;
@@ -35,6 +36,7 @@ public class UserController {
      * @param dto 유저 생성에 필요한 정보를 담은 DTO
      * @return 생성된 유저의 ID
      */
+    @Idempotent
     @PostMapping
     public Response<Long> createUser(@RequestBody CreateUserRequestDto dto) {
         User user = userService.createUser(dto);
