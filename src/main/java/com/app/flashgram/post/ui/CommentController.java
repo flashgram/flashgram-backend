@@ -1,5 +1,6 @@
 package com.app.flashgram.post.ui;
 
+import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.principal.AuthPrincipal;
 import com.app.flashgram.common.principal.UserPrincipal;
 import com.app.flashgram.common.ui.Response;
@@ -39,6 +40,7 @@ public class CommentController {
      * @param dto 댓글 생성에 필요한 정보를 담은 DTO
      * @return 생성된 댓글의 ID
      */
+    @Idempotent
     @PostMapping
     public Response<Long> createComment(@RequestBody CreateCommentRequestDto dto) {
         Comment comment = commentService.createComment(dto);
@@ -53,6 +55,7 @@ public class CommentController {
      * @param dto 댓글 수정에 필요한 정보를 담은 DTO
      * @return 수정된 댓글의 ID
      */
+    @Idempotent
     @PatchMapping("/{commentId}")
     public Response<Long> updateComment(@PathVariable(name = "commentId") Long commentId, @RequestBody UpdateCommentRequestDto dto) {
         Comment comment = commentService.updateComment(commentId, dto);
@@ -66,6 +69,7 @@ public class CommentController {
      * @param dto 좋아요 추가에 필요한 정보를 담은 DTO
      * @return void 응답
      */
+    @Idempotent
     @PostMapping("/like")
     public Response<Void> likeComment(@RequestBody LikeRequestDto dto) {
         commentService.likeComment(dto);
@@ -79,6 +83,7 @@ public class CommentController {
      * @param dto 좋아요 취소에 필요한 정보를 담은 DTO
      * @return void 응답
      */
+    @Idempotent
     @PostMapping("/unlike")
     public Response<Void> unlikeComment(@RequestBody LikeRequestDto dto) {
         commentService.unlikeComment(dto);
