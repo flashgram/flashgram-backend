@@ -39,6 +39,9 @@ dependencies {
 	// fcm(firebase cloud messaging)
 	implementation("com.google.firebase:firebase-admin:9.3.0")
 
+	// mail
+	implementation("com.sun.mail:jakarta.mail:2.0.1")
+
 	// test
 	testImplementation(platform("org.junit:junit-bom:5.9.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
