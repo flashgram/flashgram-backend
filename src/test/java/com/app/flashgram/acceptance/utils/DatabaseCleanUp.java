@@ -29,7 +29,7 @@ public class DatabaseCleanUp implements InitializingBean {
                 .map(entry -> entry.getJavaType().getAnnotation(Table.class).name())
                 .toList();
 
-        notGeneratedTableNames = List.of("fg_user_auth", "fg_user_relation", "fg_like");
+        notGeneratedTableNames = List.of("fg_user_auth", "fg_user_relation", "fg_like", "fg_fcm_token");
     }
 
     @Transactional
