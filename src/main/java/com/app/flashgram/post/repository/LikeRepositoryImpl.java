@@ -1,5 +1,6 @@
 package com.app.flashgram.post.repository;
 
+import com.app.flashgram.notification.application.interfaces.MessageRepository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
@@ -29,6 +30,7 @@ public class LikeRepositoryImpl implements LikeRepository {
     private final JpaLikeRepository jpaLikeRepository;
     private final JpaPostRepository jpaPostRepository;
     private final JpaCommentRepository jpaCommentRepository;
+    private final MessageRepository messageRepository;
 
     /**
      * 유저가 특정 게시물 좋아요 여부 확인
@@ -59,6 +61,7 @@ public class LikeRepositoryImpl implements LikeRepository {
         //jpaLikeRepository.save(new LikeEntity(post, user));
         entityManager.persist(likeEntity);
         jpaPostRepository.updateLikeCount(post.getId(), 1);
+        messageRepository.semdLikeMessage(user, post.getAuthor());
     }
 
     /**

@@ -4,6 +4,8 @@ import com.app.flashgram.auth.appliction.interfaces.UserAuthRepository;
 import com.app.flashgram.auth.domain.UserAuth;
 import com.app.flashgram.auth.repositiry.entity.UserAuthEntity;
 import com.app.flashgram.auth.repositiry.jpa.JpaUserAuthRepository;
+import com.app.flashgram.notification.repository.JpaFcmTokenRepository;
+import com.app.flashgram.notification.repository.entity.FcmTokenEntity;
 import com.app.flashgram.user.application.interfaces.UserRepository;
 import com.app.flashgram.user.domain.User;
 import jakarta.transaction.Transactional;
@@ -20,6 +22,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
 
     private final JpaUserAuthRepository jpaUserAuthRepository;
     private final UserRepository userRepository;
+    private final JpaFcmTokenRepository jpaFcmTokenRepository;
 
     /**
      * 새로운 유저를 등록하고 인증 정보를 저장
@@ -49,7 +52,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
      */
     @Override
     @Transactional
-    public UserAuth loginUser(String email, String password) {
+    public UserAuth loginUser(String email, String password, String fcmToken) {
         UserAuthEntity entity = jpaUserAuthRepository.findById(email).orElseThrow();
         UserAuth userAuth = entity.toUserAuth();
 
@@ -59,7 +62,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
         }
 
         entity.updateLastLoginDt();
-
+        jpaFcmTokenRepository.save(new FcmTokenEntity(userAuth.getUserId(), fcmToken));
         return userAuth;
     }
 }
