@@ -45,6 +45,20 @@ public class CommentCommandRepositoryImpl implements CommentCommandRepository {
         return commentEntity.toComment();
     }
 
+    @Override
+    @Transactional
+    public void delete(Long commentId) {
+
+        jpaCommentRepository.deleteCommentById(commentId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteAllByPost(Long postId) {
+
+        jpaCommentRepository.deleteAllByPostId(postId);
+    }
+
     /**
      * 댓글 ID로 댓글을 조회
      *

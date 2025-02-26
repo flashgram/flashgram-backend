@@ -27,6 +27,15 @@ public interface JpaPostRepository extends JpaRepository<PostEntity, Long> {
     void updatePostEntity(PostEntity postEntity);
 
     /**
+     * 게시물 ID로 삭제
+     *
+     * @param id 삭제할 게시물의 ID
+     */
+    @Modifying
+    @Query("DELETE FROM PostEntity p WHERE p.id = :id")
+    void deletePostById(Long id);
+
+    /**
      * 게시물의 좋아요 수 업데이트
      * 업데이트 시 수정 시간(updAt)이 현재 시간으로 자동 설정
      *

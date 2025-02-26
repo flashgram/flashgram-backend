@@ -3,6 +3,7 @@ package com.app.flashgram.post.appication;
 import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
+import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.appication.interfaces.LikeRepository;
 import com.app.flashgram.post.appication.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
@@ -19,11 +20,13 @@ public class PostService {
     private final UserService userService;
 
     private final PostRepository postRepository;
+    private final CommentCommandRepository commentCommandRepository;
     private final LikeRepository likeRepository;
 
-    public PostService(UserService userService, PostRepository postRepository, LikeRepository likeRepository) {
+    public PostService(UserService userService, PostRepository postRepository, CommentCommandRepository commentCommandRepository, LikeRepository likeRepository) {
         this.userService = userService;
         this.postRepository = postRepository;
+        this.commentCommandRepository = commentCommandRepository;
         this.likeRepository = likeRepository;
     }
 
@@ -64,6 +67,14 @@ public class PostService {
 
         post.updatePost(user, dto.content(), dto.state());
         return postRepository.save(post);
+    }
+
+    public void deletePost(Long postId) {
+
+        likeRepository.unlikeAllByPost(postId);
+        likeRepository.unlikeAllByCommentsOfPost(postId);
+        commentCommandRepository.deleteAllByPost(postId);
+        postRepository.delete(postId);
     }
 
     /**

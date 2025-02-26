@@ -28,4 +28,14 @@ public class FakeCommentCommandRepository implements CommentCommandRepository {
     public Comment findById(Long id) {
         return store.get(id);
     }
+
+    @Override
+    public void delete(Long commentId) {
+        store.remove(commentId);
+    }
+
+    @Override
+    public void deleteAllByPost(Long postId) {
+
+    }
 }

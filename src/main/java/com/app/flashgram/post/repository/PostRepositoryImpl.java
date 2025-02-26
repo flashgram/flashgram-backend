@@ -44,6 +44,13 @@ public class PostRepositoryImpl implements PostRepository {
     }
 
     @Override
+    @Transactional
+    public void delete(Long postId) {
+
+        jpaPostRepository.deletePostById(postId);
+    }
+
+    @Override
     public Post findById(Long id) {
         PostEntity entity = jpaPostRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 

@@ -14,6 +14,7 @@ import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,6 +62,19 @@ public class CommentController {
         Comment comment = commentService.updateComment(commentId, dto);
 
         return Response.ok(comment.getId());
+    }
+
+    /**
+     * 댓글 삭제
+     *
+     * @param commentId 삭제할 댓글의 ID
+     * @return void 응답
+     */
+    @Idempotent
+    @DeleteMapping("/{commentId}")
+    public Response<Void> deleteComment(@PathVariable(name = "commentId") Long commentId) {
+        commentService.deleteComment(commentId);
+        return Response.ok(null);
     }
 
     /**
