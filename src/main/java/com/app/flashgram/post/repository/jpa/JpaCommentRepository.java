@@ -25,6 +25,19 @@ public interface JpaCommentRepository extends JpaRepository<CommentEntity, Long>
     void updateCommentEntitiy(CommentEntity comment);
 
     /**
+     * 댓글 ID로 삭제
+     *
+     * @param id 삭제할 게시물의 ID
+     */
+    @Modifying
+    @Query("DELETE FROM CommentEntity p WHERE p.id = :id")
+    void deleteCommentById(Long id);
+
+    @Modifying
+    @Query("DELETE FROM CommentEntity c WHERE c.post.id = :postId")
+    void deleteAllByPostId(Long postId);
+
+    /**
      * 댓글의 좋아요 수 업데이트
      * 업데이트 시 수정 시간(updAt)이 현재 시간으로 자동 설정
      *

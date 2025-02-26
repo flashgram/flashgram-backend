@@ -3,6 +3,7 @@ package com.app.flashgram.post.repository;
 import com.app.flashgram.post.appication.interfaces.CommentQueryRepository;
 import com.app.flashgram.post.repository.entity.comment.QCommentEntity;
 import com.app.flashgram.post.repository.entity.like.QLikeEntity;
+import com.app.flashgram.post.repository.jpa.JpaCommentRepository;
 import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
 import com.app.flashgram.user.repository.entity.QUserEntity;
 import com.querydsl.core.types.Projections;
@@ -21,6 +22,8 @@ public class CommentQueryRepositoryImpl implements CommentQueryRepository {
     private static final QCommentEntity commentEntity = QCommentEntity.commentEntity;
     private static final QUserEntity userEntity = QUserEntity.userEntity;
     private static final QLikeEntity likeEntity = QLikeEntity.likeEntity;
+
+    private final JpaCommentRepository jpaCommentRepository;
 
     /**
      * 특정 게시물의 댓글 목록을 조회

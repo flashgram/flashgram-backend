@@ -8,6 +8,7 @@ import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.domain.Post;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,13 @@ public class PostController {
         Post post = postService.updatePost(postId, dto);
 
         return Response.ok(post.getId());
+    }
+
+    @Idempotent
+    @DeleteMapping("/{postId}")
+    public Response<Void> deletePost(@PathVariable(name = "postId") Long postId) {
+        postService.deletePost(postId);
+        return Response.ok(null);
     }
 
     /**

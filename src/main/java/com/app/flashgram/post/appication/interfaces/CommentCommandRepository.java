@@ -6,4 +6,6 @@ public interface CommentCommandRepository {
 
     Comment save(Comment comment);
     Comment findById(Long id);
+    void delete(Long commentId);
+    void deleteAllByPost(Long postId);
 }

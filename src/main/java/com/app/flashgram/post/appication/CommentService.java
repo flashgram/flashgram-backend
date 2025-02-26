@@ -40,20 +40,6 @@ public class CommentService {
     }
 
     /**
-     * 게시물 ID와 유저 ID를 기준으로 댓글 목록을 조회
-     * 또한, 마지막 댓글 ID(lastContentId)를 통해 페이지네이션을 지원
-     *
-     * @param postId 게시물의 ID
-     * @param userId 댓글을 조회할 유저의 ID
-     * @param lastContentId 마지막으로 조회된 댓글 ID (옵션)
-     * @return 조회된 댓글 목록
-
-    public List<GetCommentContentResponseDto> getCommentList(Long postId, Long userId, Long lastContentId) {
-        return CommentCommandRepository.findByPostId(postId, userId, lastContentId);
-    }*/
-
-
-    /**
      * 새로운 댓글을 생성
      *
      * @param dto 댓글 생성에 필요한 정보를 담은 DTO
@@ -79,6 +65,17 @@ public class CommentService {
 
         comment.updateComment(user, dto.content());
         return CommentCommandRepository.save(comment);
+    }
+
+    /**
+     * 댓글 삭제
+     *
+     * @param commentId 삭제할 댓글의 ID
+     */
+    public void deleteComment(Long commentId) {
+
+        likeRepository.unlikeAllByComment(commentId);
+        CommentCommandRepository.delete(commentId);
     }
 
     /**

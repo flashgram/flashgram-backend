@@ -13,4 +13,8 @@ public interface LikeRepository {
     boolean checkLike(Comment comment, User user);
     void like(Comment comment, User user);
     void unlike(Comment comment, User user);
+
+    void unlikeAllByPost(Long postId);
+    void unlikeAllByComment(Long commentId);
+    void unlikeAllByCommentsOfPost(Long postId);
 }
