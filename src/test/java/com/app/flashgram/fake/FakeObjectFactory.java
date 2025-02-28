@@ -1,5 +1,7 @@
 package com.app.flashgram.fake;
 
+import com.app.flashgram.auth.appliction.interfaces.EmailSendRepository;
+import com.app.flashgram.auth.repository.FakeEmailSendRepositoryImpl;
 import com.app.flashgram.post.appication.CommentService;
 import com.app.flashgram.post.appication.PostService;
 import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
@@ -23,6 +25,7 @@ public class FakeObjectFactory {
     private static final PostRepository fakePostRepository = new FakePostRepository();
     private static final LikeRepository fakeLikeRepository = new FakeLikeRepository();
     private static final CommentCommandRepository FAKE_COMMENT_COMMAND_REPOSITORY = new FakeCommentCommandRepository();
+    private static final EmailSendRepository fakeEmailSendRepository = new FakeEmailSendRepositoryImpl();
 
     private static final UserService userService = new UserService(fakeUserRepository);
     private static final UserRelationService userRelationService = new UserRelationService(userService, fakeUserRelationRepository);
@@ -45,4 +48,8 @@ public class FakeObjectFactory {
     }
 
     public static CommentService getCommentService() {return commentService;}
+
+    public static EmailSendRepository getEmailSendRepository() {
+        return fakeEmailSendRepository;
+    }
 }
