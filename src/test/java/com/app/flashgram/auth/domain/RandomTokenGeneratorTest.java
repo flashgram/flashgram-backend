@@ -1,11 +1,10 @@
-package com.app.flashgram.auth;
+package com.app.flashgram.auth.domain;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.app.flashgram.auth.domain.RandomTokenGenerator;
 import org.junit.jupiter.api.Test;
 
 public class RandomTokenGeneratorTest {
