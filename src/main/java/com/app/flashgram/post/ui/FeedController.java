@@ -29,12 +29,10 @@ public class FeedController {
      * @param lastPostId 마지막으로 본 게시물의 ID (optional)
      * @return 유저의 게시물 피드를 담은 응답 객체
      */
-    @GetMapping("")
+    @GetMapping
     public Response<List<GetPostContentResponseDto>> getPostFeed(@AuthPrincipal UserPrincipal userPrincipal, Long lastPostId) {
         List<GetPostContentResponseDto> result = queueQueryRepository.getContentResponse(userPrincipal.getUserId(), lastPostId);
 
         return Response.ok(result);
     }
-
-
 }

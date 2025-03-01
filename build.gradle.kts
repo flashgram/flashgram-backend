@@ -21,6 +21,9 @@ dependencies {
 	// mysql
 	runtimeOnly("com.mysql:mysql-connector-j")
 
+	// redis
+	implementation ("org.springframework.boot:spring-boot-starter-data-redis")
+
 	// lombok
 	implementation ("org.projectlombok:lombok")
 	annotationProcessor ("org.projectlombok:lombok")
