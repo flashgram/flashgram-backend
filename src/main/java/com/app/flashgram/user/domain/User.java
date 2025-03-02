@@ -41,6 +41,32 @@ public class User {
     }
 
     /**
+     * 유저 이름 업데이트
+     *
+     * 유저의 이름 업데이트
+     *
+     * @param name 새 유저 이름
+     */
+    public void updateName(String name) {
+        if (name != null) {
+            this.userInfo = new UserInfo(name, this.userInfo.getProfileImgUrl());
+        }
+    }
+
+    /**
+     * 유저 프로필 이미지 업데이트
+     *
+     * 유저의 프로필 이미지 업데이트
+     *
+     * @param profileImg 새 프로필 이미지 URL
+     */
+    public void updateProfileImg(String profileImg) {
+        if (profileImg != null) {
+            this.userInfo = new UserInfo(this.userInfo.getName(), profileImg);
+        }
+    }
+
+    /**
      * 지정된 유저 팔로우
      * 팔로우 시 자신의 팔로잉 수와 대상 유저의 팔로워 수가 증가
      *
