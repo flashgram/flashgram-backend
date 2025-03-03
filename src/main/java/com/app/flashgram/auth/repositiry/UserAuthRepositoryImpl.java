@@ -62,6 +62,7 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
         }
 
         entity.updateLastLoginDt();
+
         jpaFcmTokenRepository.save(new FcmTokenEntity(userAuth.getUserId(), fcmToken));
         return userAuth;
     }

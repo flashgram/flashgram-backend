@@ -28,7 +28,7 @@ public class FcmMessageRepositoryImpl implements MessageRepository {
      * @param targetUser 좋아요를 받은 글의 작성자
      */
     @Override
-    public void semdLikeMessage(User sender, User targetUser) {
+    public void sendLikeMessage(User sender, User targetUser) {
         Optional<FcmTokenEntity> tokenEntity = jpaFcmTokenRepository.findById(targetUser.getId());
 
         if (tokenEntity.isEmpty()) {
