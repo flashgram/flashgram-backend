@@ -45,6 +45,9 @@ dependencies {
 	// mail
 	implementation("com.sun.mail:jakarta.mail:2.0.1")
 
+	// openAPI
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+
 	// test
 	testImplementation(platform("org.junit:junit-bom:5.9.1"))
 	testImplementation("org.junit.jupiter:junit-jupiter")

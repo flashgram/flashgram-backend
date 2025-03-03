@@ -11,6 +11,8 @@ import com.app.flashgram.admin.ui.dto.users.GetUserTableResponseDto;
 import com.app.flashgram.admin.ui.query.AdminTableQueryRepository;
 import com.app.flashgram.admin.ui.query.UserStatsQueryRepository;
 import com.app.flashgram.common.ui.Response;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Tag(name = "관리자 API", description = "관리자 관련 API입니다.")
 public class AdminController {
 
     private final UserStatsQueryRepository userStatsQueryRepository;
@@ -37,6 +40,7 @@ public class AdminController {
      * @return 일별 유저 등록 통계 목록
      */
     @GetMapping("/index")
+    @Operation(summary = "유저 등록 통계", description = "일주일간 유저 등록 수를 일별로 통계 냅니다.")
     public Response<List<GetDailyUserResponseDto>> index() {
         List<GetDailyUserResponseDto> result = userStatsQueryRepository.getDailyResisterUserStats(7);
 
@@ -54,6 +58,7 @@ public class AdminController {
      *         - 실패 시: 적절한 HTTP 상태 코드와 에러 메시지
      */
     @GetMapping("/users")
+    @Operation(summary = "유저 목록 조회", description = "등록된 유저의 목록을 조회합니다.")
     public Response<GetTableListResponse<GetUserTableResponseDto>> users(GetUserTableRequestDto dto) {
         GetTableListResponse<GetUserTableResponseDto> result = adminTableQueryRepository.getUserTableData(dto);
 
@@ -71,6 +76,7 @@ public class AdminController {
      *         - 실패 시: 적절한 HTTP 상태 코드와 에러 메시지
      */
     @GetMapping("/posts")
+    @Operation(summary = "게시글 목록 조회", description = "등록된 게사글의 목록을 조회합니다.")
     public Response<GetTableListResponse<GetPostTableResponseDto>> posts(
             GetPostTableRequestDto dto) {
         GetTableListResponse<GetPostTableResponseDto> result = adminTableQueryRepository.getPostTableData(dto);
@@ -89,6 +95,7 @@ public class AdminController {
      *         - 실패 시: 적절한 HTTP 상태 코드와 에러 메시지
      */
     @GetMapping("/comments")
+    @Operation(summary = "댓글 목록 조회", description = "등록된 댓글의 목록을 조회합니다.")
     public Response<GetTableListResponse<GetCommentTableResponseDto>> comments(
             GetCommentTableRequestDto dto) {
         GetTableListResponse<GetCommentTableResponseDto> result = adminTableQueryRepository.getCommentTableData(dto);
