@@ -4,5 +4,5 @@ import com.app.flashgram.user.domain.User;
 
 public interface MessageRepository {
 
-    void semdLikeMessage(User sender, User targetUser);
+    void sendLikeMessage(User sender, User targetUser);
 }

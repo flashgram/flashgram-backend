@@ -60,7 +60,7 @@ public class LikeRepositoryImpl implements LikeRepository {
 
         entityManager.persist(likeEntity);
         jpaPostRepository.updateLikeCount(post.getId(), 1);
-        messageRepository.semdLikeMessage(user, post.getAuthor());
+        messageRepository.sendLikeMessage(user, post.getAuthor());
     }
 
     /**
