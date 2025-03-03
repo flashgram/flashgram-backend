@@ -11,6 +11,8 @@ import com.app.flashgram.post.appication.dto.UpdateCommentRequestDto;
 import com.app.flashgram.post.appication.interfaces.CommentQueryRepository;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.ui.dto.GetCommentContentResponseDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/comment")
 @RequiredArgsConstructor
+@Tag(name = "댓글 API", description = "댓글 관련 API입니다.")
 public class CommentController {
 
     private final CommentService commentService;
@@ -43,6 +47,7 @@ public class CommentController {
      */
     @Idempotent
     @PostMapping
+    @Operation(summary = "댓글 생성", description = "댓글을 생성합니다.")
     public Response<Long> createComment(@RequestBody CreateCommentRequestDto dto) {
         Comment comment = commentService.createComment(dto);
 
@@ -58,6 +63,7 @@ public class CommentController {
      */
     @Idempotent
     @PatchMapping("/{commentId}")
+    @Operation(summary = "댓글 수정", description = "댓글을 수정합니다.")
     public Response<Long> updateComment(@PathVariable(name = "commentId") Long commentId, @RequestBody UpdateCommentRequestDto dto) {
         Comment comment = commentService.updateComment(commentId, dto);
 
@@ -72,6 +78,7 @@ public class CommentController {
      */
     @Idempotent
     @DeleteMapping("/{commentId}")
+    @Operation(summary = "댓글 삭제", description = "댓글을 삭제합니다.")
     public Response<Void> deleteComment(@PathVariable(name = "commentId") Long commentId) {
         commentService.deleteComment(commentId);
         return Response.ok(null);
@@ -85,6 +92,7 @@ public class CommentController {
      */
     @Idempotent
     @PostMapping("/like")
+    @Operation(summary = "댓글 좋아요", description = "특정 댓글에 좋아요를 추가합니다.")
     public Response<Void> likeComment(@RequestBody LikeRequestDto dto) {
         commentService.likeComment(dto);
 
@@ -99,28 +107,11 @@ public class CommentController {
      */
     @Idempotent
     @PostMapping("/unlike")
+    @Operation(summary = "댓글 좋아요 취소", description = "댓글의 좋아요를 취소합니다.")
     public Response<Void> unlikeComment(@RequestBody LikeRequestDto dto) {
         commentService.unlikeComment(dto);
 
         return Response.ok(null);
-    }
-
-    /**
-     * 게시물에 대한 댓글 목록을 조회하는 API
-     * 주어진 게시물 ID와 유저 ID를 기반으로 댓글 목록을 조회하고, 해당 댓글의 정보를 응답으로 반환
-     *
-     * @param postId 조회할 게시물의 ID
-     * @param userId 댓글을 조회하는 유저의 ID
-     * @param lastCommentId 마지막으로 조회한 댓글의 ID
-     * @return 댓글 목록을 포함한 응답
-     */
-    @GetMapping("/{postId}/{userId}")
-    public ResponseEntity<List<GetCommentContentResponseDto>> getCommentList(
-            @PathVariable Long postId,
-            @PathVariable(name = "userId") Long userId,
-            Long lastCommentId) {
-        List<GetCommentContentResponseDto> response = commentQueryRepository.findByPostId(postId, userId, lastCommentId);
-        return ResponseEntity.ok(response);
     }
 
     /**
@@ -133,10 +124,11 @@ public class CommentController {
      * @return 댓글 목록을 포함한 응답
      */
     @GetMapping("/{postId}")
+    @Operation(summary = "댓글 목록 조회", description = "특정 게시물의 댓글 목록을 조회합니다.")
     public ResponseEntity<List<GetCommentContentResponseDto>> getCommentList(
             @PathVariable Long postId,
             @AuthPrincipal UserPrincipal userPrincipal,
-            Long lastCommentId) {
+            @RequestParam(required = false)Long lastCommentId) {
         List<GetCommentContentResponseDto> response = commentQueryRepository.findByPostId(postId, userPrincipal.getUserId(), lastCommentId);
 
         return ResponseEntity.ok(response);

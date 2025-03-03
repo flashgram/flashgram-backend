@@ -7,6 +7,8 @@ import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
 import com.app.flashgram.post.appication.dto.LikeRequestDto;
 import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.domain.Post;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@Tag(name = "게시글 API", description = "게시글 관련 API입니다.")
 public class PostController {
 
     private final PostService postService;
@@ -35,6 +38,7 @@ public class PostController {
      */
     @Idempotent
     @PostMapping
+    @Operation(summary = "게시글 생성", description = "게시글을 생성합니다.")
     public Response<Long> createPost(@RequestBody CreatePostRequestDto dto) {
         Post post = postService.createPost(dto);
 
@@ -50,6 +54,7 @@ public class PostController {
      */
     @Idempotent
     @PatchMapping("/{postId}")
+    @Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
     public Response<Long> updatePost(@PathVariable(name = "postId") Long postId, @RequestBody UpdatePostRequestDto dto) {
         Post post = postService.updatePost(postId, dto);
 
@@ -58,6 +63,7 @@ public class PostController {
 
     @Idempotent
     @DeleteMapping("/{postId}")
+    @Operation(summary = "게시글 삭제", description = "게시글을 삭제합니다.")
     public Response<Void> deletePost(@PathVariable(name = "postId") Long postId) {
         postService.deletePost(postId);
         return Response.ok(null);
@@ -72,6 +78,7 @@ public class PostController {
      */
     @Idempotent
     @PostMapping("/like")
+    @Operation(summary = "게시글 좋아요", description = "특정 게시글에 좋아요를 추가합니다.")
     public Response<Void> likePost(@RequestBody LikeRequestDto dto) {
         postService.likePost(dto);
 
@@ -87,6 +94,7 @@ public class PostController {
      */
     @Idempotent
     @PostMapping("/unlike")
+    @Operation(summary = "게시글 좋아요 취소", description = "게시글의 좋아요를 취소합니다.")
     public Response<Void> unlikePost(@RequestBody LikeRequestDto dto) {
         postService.unlikePost(dto);
 

@@ -4,6 +4,8 @@ import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.user.application.UserRelationService;
 import com.app.flashgram.user.application.dto.FollowUserRequestDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/relation")
 @RequiredArgsConstructor
+@Tag(name = "유저 팔로우 API", description = "유저 팔로우 관련 API입니다.")
 public class UserRelationController {
 
     private final UserRelationService relationService;
@@ -30,6 +33,7 @@ public class UserRelationController {
      */
     @Idempotent
     @PostMapping("/follow")
+    @Operation(summary = "유저 팔로우", description = "특정 유저를 팔로우합니다.")
     public Response<Void> followUser(@RequestBody FollowUserRequestDto dto) {
         relationService.follow(dto);
 
@@ -45,6 +49,7 @@ public class UserRelationController {
      */
     @Idempotent
     @PostMapping("/unfollow")
+    @Operation(summary = "유저 언팔로우", description = "특정 유저를 언팔로우합니다.")
     public Response<Void> unfollowUser(@RequestBody FollowUserRequestDto dto) {
         relationService.unfollow(dto);
 

@@ -9,6 +9,8 @@ import com.app.flashgram.user.application.dto.GetUserResponseDto;
 import com.app.flashgram.user.application.dto.UpdateUserRequestDto;
 import com.app.flashgram.user.domain.User;
 import com.app.flashgram.user.repository.jpa.JpaUserListQueryRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@Tag(name = "유저 API", description = "유저 관련 API입니다.")
 public class UserController {
 
     private final UserService userService;
@@ -40,6 +43,7 @@ public class UserController {
      */
     @Idempotent
     @PostMapping
+    @Operation(summary = "유저 생성", description = "새로운 유저를 생성합니다.")
     public Response<Long> createUser(@RequestBody CreateUserRequestDto dto) {
         User user = userService.createUser(dto);
 
@@ -55,6 +59,7 @@ public class UserController {
      */
     @Idempotent
     @PatchMapping("/{userId}")
+    @Operation(summary = "유저 정보 수정", description = "유저 정보를 수정합니다.")
     public Response<Long> updateUser(@PathVariable(name = "userId") Long userId,
                                     @RequestBody UpdateUserRequestDto dto) {
         User updatedUser = userService.updateUser(userId, dto);
@@ -62,12 +67,13 @@ public class UserController {
     }
 
     /**
-     * 특정 유저의 프로필 정보 조회
+     유저의 프로필 정보 조회
      *
      * @param userId 조회할 유저의 ID
      * @return 유저 프로필 정보
      */
     @GetMapping("/{userId}")
+    @Operation(summary = "유저 조회", description = "특정 유저 정보를 조회합니다.")
     public Response<GetUserResponseDto> getUserProfile(@PathVariable(name = "userId") Long userId) {
         return Response.ok(userService.getUserProfile(userId));
     }
@@ -80,6 +86,7 @@ public class UserController {
      * @return 팔로워 목록 (각 팔로워의 이름과 프로필 이미지 URL 포함)
      */
     @GetMapping("/{userId}/follower")
+    @Operation(summary = "유저 팔로워 목록 조회", description = "특정 유저의 팔로워 정보를 조회합니다.")
     public Response<List<GetUserListResposeDto>> getFollowerList(@PathVariable(name = "userId") Long userId) {
         List<GetUserListResposeDto> result = userListQueryRepository.getFollowerUserList(userId);
 
@@ -94,6 +101,7 @@ public class UserController {
      * @return 팔로잉 목록 (각 팔로잉 유저의 이름과 프로필 이미지 URL 포함)
      */
     @GetMapping("/{userId}/following")
+    @Operation(summary = "유저 팔로잉 목록 조회", description = "특정 유저의 팔로잉 정보를 조회합니다.")
     public Response<List<GetUserListResposeDto>> getFollowingList(@PathVariable(name = "userId") Long userId) {
         List<GetUserListResposeDto> result = userListQueryRepository.getFollowingUserList(userId);
 
