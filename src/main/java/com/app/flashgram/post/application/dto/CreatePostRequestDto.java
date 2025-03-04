@@ -1,4 +1,4 @@
-package com.app.flashgram.post.appication.dto;
+package com.app.flashgram.post.application.dto;
 
 import com.app.flashgram.post.domain.content.PostPublicationState;
 

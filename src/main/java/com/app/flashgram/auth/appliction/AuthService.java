@@ -45,6 +45,13 @@ public class AuthService {
         return userAuth.getUserId();
     }
 
+
+    /**
+     * 유저 로그인 메소드
+     *
+     * @param dto 로그인 요청 정보를 담고 있는 DTO 객체
+     * @return 액세스 토큰을 포함한 응답 DTO
+     */
     public UserAccessTokenResponseDto login(LoginRequestDto dto){
         UserAuth userAuth = userAuthRepository.loginUser(dto.email(), dto.password(),dto.fcmToken());
         String token = tokenProvider.createToken(userAuth.getUserId(), userAuth.getUserRole());

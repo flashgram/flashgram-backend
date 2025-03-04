@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.PostRepository;
+import com.app.flashgram.post.application.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import java.util.HashMap;
 import java.util.Map;

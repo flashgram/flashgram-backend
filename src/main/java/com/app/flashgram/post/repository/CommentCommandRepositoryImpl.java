@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
+import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.repository.entity.comment.CommentEntity;

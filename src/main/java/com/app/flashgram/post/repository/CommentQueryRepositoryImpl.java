@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.CommentQueryRepository;
+import com.app.flashgram.post.application.interfaces.CommentQueryRepository;
 import com.app.flashgram.post.repository.entity.comment.QCommentEntity;
 import com.app.flashgram.post.repository.entity.like.QLikeEntity;
 import com.app.flashgram.post.repository.jpa.JpaCommentRepository;

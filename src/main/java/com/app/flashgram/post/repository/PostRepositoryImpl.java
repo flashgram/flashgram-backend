@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.PostRepository;
+import com.app.flashgram.post.application.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.repository.entity.post.PostEntity;
 import com.app.flashgram.post.repository.jpa.JpaPostRepository;
@@ -43,6 +43,11 @@ public class PostRepositoryImpl implements PostRepository {
         return postEntity.toPost();
     }
 
+    /**
+     * 게시글 삭제
+     *
+     * @param postId 삭제할 게시글의 ID
+     */
     @Override
     @Transactional
     public void delete(Long postId) {
@@ -50,6 +55,13 @@ public class PostRepositoryImpl implements PostRepository {
         jpaPostRepository.deletePostById(postId);
     }
 
+    /**
+     * 게시글 조회
+     *
+     * @param id 조회할 게시글의 ID
+     * @return 조회된 Post 객체
+     * @throws IllegalArgumentException 해당 ID의 게시글이 존재하지 않는 경우 예외 발생
+     */
     @Override
     public Post findById(Long id) {
         PostEntity entity = jpaPostRepository.findById(id).orElseThrow(IllegalArgumentException::new);

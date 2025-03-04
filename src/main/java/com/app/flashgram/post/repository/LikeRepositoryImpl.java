@@ -1,7 +1,7 @@
 package com.app.flashgram.post.repository;
 
 import com.app.flashgram.notification.application.interfaces.MessageRepository;
-import com.app.flashgram.post.appication.interfaces.LikeRepository;
+import com.app.flashgram.post.application.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.post.repository.entity.like.LikeEntity;
@@ -126,6 +126,11 @@ public class LikeRepositoryImpl implements LikeRepository {
         jpaCommentRepository.updateLikeCount(comment.getId(), -1);
     }
 
+    /**
+     * 특정 게시물의 모든 좋아요 취소
+     *
+     * @param postId 좋아요를 취소할 게시물의 ID
+     */
     @Override
     @Transactional
     public void unlikeAllByPost(Long postId) {
@@ -133,6 +138,12 @@ public class LikeRepositoryImpl implements LikeRepository {
         jpaLikeRepository.deleteByPostId(postId);
     }
 
+
+    /**
+     * 특정 댓글의 모든 좋아요 취소
+     *
+     * @param commentId 좋아요를 취소할 댓글의 ID
+     */
     @Override
     @Transactional
     public void unlikeAllByComment(Long commentId) {
@@ -140,6 +151,11 @@ public class LikeRepositoryImpl implements LikeRepository {
         jpaLikeRepository.deleteByCommentId(commentId);
     }
 
+    /**
+     * 특정 게시물에 포함된 모든 댓글의 좋아요 취소
+     *
+     * @param postId 좋아요를 취소할 댓글이 포함된 게시물의 ID
+     */
     @Override
     @Transactional
     public void unlikeAllByCommentsOfPost(Long postId) {

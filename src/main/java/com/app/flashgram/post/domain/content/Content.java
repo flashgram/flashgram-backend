@@ -24,6 +24,13 @@ public abstract class Content {
         this.datetimeInfo = new DatetimeInfo();
     }
 
+    /**
+     * 컨텐츠 내용을 업데이트하는 메서드
+     * 업데이트 시 유효성 검사 수행 후 적용
+     *
+     * @param updateContent 변경할 컨텐츠 내용
+     * @throws IllegalArgumentException 유효성 검사 실패 시 예외 발생
+     */
     public void updateContent(String updateContent) {
         checkText(updateContent);
 

@@ -2,10 +2,10 @@ package com.app.flashgram.post.ui;
 
 import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
-import com.app.flashgram.post.appication.PostService;
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
-import com.app.flashgram.post.appication.dto.LikeRequestDto;
-import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
+import com.app.flashgram.post.application.PostService;
+import com.app.flashgram.post.application.dto.CreatePostRequestDto;
+import com.app.flashgram.post.application.dto.LikeRequestDto;
+import com.app.flashgram.post.application.dto.UpdatePostRequestDto;
 import com.app.flashgram.post.domain.Post;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -61,6 +61,12 @@ public class PostController {
         return Response.ok(post.getId());
     }
 
+    /**
+     * 게시글 삭제
+     *
+     * @param postId 삭제할 게시물의 ID
+     * @return 응답 객체 (데이터 없음)
+     */
     @Idempotent
     @DeleteMapping("/{postId}")
     @Operation(summary = "게시글 삭제", description = "게시글을 삭제합니다.")

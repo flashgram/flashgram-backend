@@ -2,8 +2,8 @@ package com.app.flashgram.post.application;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.app.flashgram.post.appication.dto.LikeRequestDto;
-import com.app.flashgram.post.appication.dto.UpdateCommentRequestDto;
+import com.app.flashgram.post.application.dto.LikeRequestDto;
+import com.app.flashgram.post.application.dto.UpdateCommentRequestDto;
 import com.app.flashgram.post.domain.comment.Comment;
 import org.junit.jupiter.api.Test;
 

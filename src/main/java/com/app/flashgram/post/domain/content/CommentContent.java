@@ -1,5 +1,9 @@
 package com.app.flashgram.post.domain.content;
 
+/**
+ * 댓글 내용을 관리하는 클래스
+ * 댓글의 길이를 검증하는 로직 포함
+ */
 public class CommentContent extends Content {
 
     public static final int MIN_COMMENT_LENGTH = 5;
@@ -9,6 +13,12 @@ public class CommentContent extends Content {
         super(content);
     }
 
+    /**
+     * 댓글 내용의 유효성 검사
+     *
+     * @param content 검증할 댓글 내용
+     * @throws IllegalArgumentException 댓글이 비어 있거나 길이 제한을 초과할 경우 예외 발생
+     */
     @Override
     public void checkText(String content) {
         if (content == null || content.isEmpty()) {

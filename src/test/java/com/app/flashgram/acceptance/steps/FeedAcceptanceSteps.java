@@ -1,6 +1,6 @@
 package com.app.flashgram.acceptance.steps;
 
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
+import com.app.flashgram.post.application.dto.CreatePostRequestDto;
 import com.app.flashgram.post.ui.dto.GetPostContentResponseDto;
 import io.restassured.RestAssured;
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.LikeRepository;
+import com.app.flashgram.post.application.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.user.domain.User;

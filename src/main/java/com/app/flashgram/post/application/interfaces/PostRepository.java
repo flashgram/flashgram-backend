@@ -1,4 +1,4 @@
-package com.app.flashgram.post.appication.interfaces;
+package com.app.flashgram.post.application.interfaces;
 
 import com.app.flashgram.post.domain.Post;
 

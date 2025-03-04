@@ -2,11 +2,11 @@ package com.app.flashgram.fake;
 
 import com.app.flashgram.auth.appliction.interfaces.EmailSendRepository;
 import com.app.flashgram.auth.repository.FakeEmailSendRepositoryImpl;
-import com.app.flashgram.post.appication.CommentService;
-import com.app.flashgram.post.appication.PostService;
-import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
-import com.app.flashgram.post.appication.interfaces.LikeRepository;
-import com.app.flashgram.post.appication.interfaces.PostRepository;
+import com.app.flashgram.post.application.CommentService;
+import com.app.flashgram.post.application.PostService;
+import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
+import com.app.flashgram.post.application.interfaces.LikeRepository;
+import com.app.flashgram.post.application.interfaces.PostRepository;
 import com.app.flashgram.post.repository.FakeCommentCommandRepository;
 import com.app.flashgram.post.repository.FakeLikeRepository;
 import com.app.flashgram.post.repository.FakePostRepository;
