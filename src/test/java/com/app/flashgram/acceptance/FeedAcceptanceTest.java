@@ -6,7 +6,7 @@ import static com.app.flashgram.acceptance.steps.FeedAcceptanceSteps.requestFeed
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.app.flashgram.acceptance.utils.AcceptanceTestTemplate;
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
+import com.app.flashgram.post.application.dto.CreatePostRequestDto;
 import com.app.flashgram.post.domain.content.PostPublicationState;
 import com.app.flashgram.post.ui.dto.GetPostContentResponseDto;
 import java.util.List;

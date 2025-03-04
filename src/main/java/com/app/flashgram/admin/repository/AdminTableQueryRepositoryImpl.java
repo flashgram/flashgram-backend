@@ -52,31 +52,6 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
                 .fetch()
                 .size();
 
-        /*
-        List<GetUserTableResponseDto> result = queryFactory
-                .select(
-                        Projections.fields(
-                                GetUserTableResponseDto.class,
-                                userEntity.id.as("id"),
-                                userAuthEntity.email.as("email"),
-                                userEntity.name.as("name"),
-                                userAuthEntity.role.as("role"),
-                                userEntity.regAt.as("regAt"),
-                                userEntity.updAt.as("updAt"),
-                                userAuthEntity.lastLoginDt.as("lastLoginDt")
-                        )
-                )
-                .from(userEntity)
-                .join(userAuthEntity).on(userAuthEntity.userId.eq(userEntity.id))
-                .where(likeName(dto.getName()))
-                .orderBy(userEntity.id.desc())
-                .offset(dto.getOffset())
-                .limit(dto.getLimit())
-                .fetch();
-
-        return new GetTableListResponse<>(total, result);
-        */
-
         List<Long> ids = queryFactory
                 .select(userEntity.id)
                 .from(userEntity)
@@ -100,7 +75,6 @@ public class AdminTableQueryRepositoryImpl implements AdminTableQueryRepository 
                                 userEntity.updAt.as("updAt"),
                                 userAuthEntity.lastLoginDt.as("lastLoginDt")
                         )
-
                 )
                 .from(userEntity)
                 .join(userAuthEntity).on(userAuthEntity.userId.eq(userEntity.id))

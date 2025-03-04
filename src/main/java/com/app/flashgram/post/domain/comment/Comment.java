@@ -28,7 +28,7 @@ public class Comment {
     }
 
     /**
-     * 게시글 도메인 객체를 생성
+     * 게시글 도메인 객체 생성
      *
      * @param id      댓글 식별자
      * @param post    게시글

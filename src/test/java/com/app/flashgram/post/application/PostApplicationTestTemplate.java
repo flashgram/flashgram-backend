@@ -1,10 +1,8 @@
 package com.app.flashgram.post.application;
 
 import com.app.flashgram.fake.FakeObjectFactory;
-import com.app.flashgram.post.appication.CommentService;
-import com.app.flashgram.post.appication.PostService;
-import com.app.flashgram.post.appication.dto.CreateCommentRequestDto;
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
+import com.app.flashgram.post.application.dto.CreateCommentRequestDto;
+import com.app.flashgram.post.application.dto.CreatePostRequestDto;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.content.PostPublicationState;
 import com.app.flashgram.user.application.UserService;

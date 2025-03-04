@@ -1,10 +1,10 @@
-package com.app.flashgram.post.appication;
+package com.app.flashgram.post.application;
 
-import com.app.flashgram.post.appication.dto.CreateCommentRequestDto;
-import com.app.flashgram.post.appication.dto.LikeRequestDto;
-import com.app.flashgram.post.appication.dto.UpdateCommentRequestDto;
-import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
-import com.app.flashgram.post.appication.interfaces.LikeRepository;
+import com.app.flashgram.post.application.dto.CreateCommentRequestDto;
+import com.app.flashgram.post.application.dto.LikeRequestDto;
+import com.app.flashgram.post.application.dto.UpdateCommentRequestDto;
+import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
+import com.app.flashgram.post.application.interfaces.LikeRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.post.domain.comment.Comment;
 import com.app.flashgram.user.application.UserService;

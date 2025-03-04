@@ -1,11 +1,11 @@
-package com.app.flashgram.post.appication;
+package com.app.flashgram.post.application;
 
-import com.app.flashgram.post.appication.dto.CreatePostRequestDto;
-import com.app.flashgram.post.appication.dto.LikeRequestDto;
-import com.app.flashgram.post.appication.dto.UpdatePostRequestDto;
-import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
-import com.app.flashgram.post.appication.interfaces.LikeRepository;
-import com.app.flashgram.post.appication.interfaces.PostRepository;
+import com.app.flashgram.post.application.dto.CreatePostRequestDto;
+import com.app.flashgram.post.application.dto.LikeRequestDto;
+import com.app.flashgram.post.application.dto.UpdatePostRequestDto;
+import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
+import com.app.flashgram.post.application.interfaces.LikeRepository;
+import com.app.flashgram.post.application.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
@@ -69,6 +69,11 @@ public class PostService {
         return postRepository.save(post);
     }
 
+    /**
+     * 게시글 삭제
+     *
+     * @param postId 삭제할 게시글 ID
+     */
     public void deletePost(Long postId) {
 
         likeRepository.unlikeAllByPost(postId);

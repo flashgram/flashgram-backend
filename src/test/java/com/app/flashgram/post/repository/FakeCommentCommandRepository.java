@@ -1,6 +1,6 @@
 package com.app.flashgram.post.repository;
 
-import com.app.flashgram.post.appication.interfaces.CommentCommandRepository;
+import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
 import com.app.flashgram.post.domain.comment.Comment;
 import java.util.HashMap;
 import java.util.Map;
