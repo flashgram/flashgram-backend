@@ -42,7 +42,7 @@ class PostServiceTest extends PostApplicationTestTemplate {
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
-        postService.likePost(likeRequestDto);
+        likeService.likePost(likeRequestDto);
 
         //then
         assertEquals(1, savePost.getLikeCount());
@@ -55,8 +55,8 @@ class PostServiceTest extends PostApplicationTestTemplate {
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
-        postService.likePost(likeRequestDto);
-        postService.likePost(likeRequestDto);
+        likeService.likePost(likeRequestDto);
+        likeService.likePost(likeRequestDto);
 
         //then
         assertEquals(1, savePost.getLikeCount());
@@ -67,10 +67,10 @@ class PostServiceTest extends PostApplicationTestTemplate {
         //given
         Post savePost = postService.createPost(postRequestDto);
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
-        postService.likePost(likeRequestDto);
+        likeService.likePost(likeRequestDto);
 
         //when
-        postService.unlikePost(likeRequestDto);
+        likeService.unlikePost(likeRequestDto);
 
         //then
         assertEquals(0, savePost.getLikeCount());
@@ -83,7 +83,7 @@ class PostServiceTest extends PostApplicationTestTemplate {
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(savePost.getId(), otherUser.getId());
-        postService.unlikePost(likeRequestDto);
+        likeService.unlikePost(likeRequestDto);
 
         //then
         assertEquals(0, savePost.getLikeCount());

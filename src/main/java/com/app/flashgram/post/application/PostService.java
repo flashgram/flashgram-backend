@@ -1,14 +1,13 @@
 package com.app.flashgram.post.application;
 
 import com.app.flashgram.post.application.dto.CreatePostRequestDto;
-import com.app.flashgram.post.application.dto.LikeRequestDto;
 import com.app.flashgram.post.application.dto.UpdatePostRequestDto;
-import com.app.flashgram.post.application.interfaces.CommentCommandRepository;
-import com.app.flashgram.post.application.interfaces.LikeRepository;
+import com.app.flashgram.post.application.event.PostDeleteEvent;
 import com.app.flashgram.post.application.interfaces.PostRepository;
 import com.app.flashgram.post.domain.Post;
 import com.app.flashgram.user.application.UserService;
 import com.app.flashgram.user.domain.User;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,16 +17,13 @@ import org.springframework.stereotype.Service;
 public class PostService {
 
     private final UserService userService;
-
     private final PostRepository postRepository;
-    private final CommentCommandRepository commentCommandRepository;
-    private final LikeRepository likeRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
-    public PostService(UserService userService, PostRepository postRepository, CommentCommandRepository commentCommandRepository, LikeRepository likeRepository) {
+    public PostService(UserService userService, PostRepository postRepository, ApplicationEventPublisher eventPublisher) {
         this.userService = userService;
         this.postRepository = postRepository;
-        this.commentCommandRepository = commentCommandRepository;
-        this.likeRepository = likeRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     /**
@@ -76,43 +72,7 @@ public class PostService {
      */
     public void deletePost(Long postId) {
 
-        likeRepository.unlikeAllByPost(postId);
-        likeRepository.unlikeAllByCommentsOfPost(postId);
-        commentCommandRepository.deleteAllByPost(postId);
+        eventPublisher.publishEvent(new PostDeleteEvent(postId));
         postRepository.delete(postId);
-    }
-
-    /**
-     * 게시글에 좋아요 추가
-     * 이미 좋아요를 누른 경우 아무 동작도 수행하지 않음
-     *
-     * @param dto 좋아요 요청 정보
-     */
-    public void likePost(LikeRequestDto dto) {
-        Post post = getPost(dto.targetId());
-        User user = userService.getUser(dto.userId());
-
-        if (likeRepository.checkLike(post, user)) {
-            return;
-        }
-
-        post.like(user);
-        likeRepository.like(post, user);
-    }
-
-    /**
-     * 게시글의 좋아요 취소
-     * 좋아요를 누르지 않은 경우 아무 동작도 수행하지 않음
-     *
-     * @param dto 좋아요 요청 정보
-     */
-    public void unlikePost(LikeRequestDto dto) {
-        Post post = getPost(dto.targetId());
-        User user = userService.getUser(dto.userId());
-
-        if (likeRepository.checkLike(post, user)) {
-            post.unlike();
-            likeRepository.unlike(post, user);
-        }
     }
 }
