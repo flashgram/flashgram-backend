@@ -5,6 +5,7 @@ import com.app.flashgram.common.principal.AuthPrincipal;
 import com.app.flashgram.common.principal.UserPrincipal;
 import com.app.flashgram.common.ui.Response;
 import com.app.flashgram.post.application.CommentService;
+import com.app.flashgram.post.application.LikeService;
 import com.app.flashgram.post.application.dto.CreateCommentRequestDto;
 import com.app.flashgram.post.application.dto.LikeRequestDto;
 import com.app.flashgram.post.application.dto.UpdateCommentRequestDto;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
     private final CommentService commentService;
+    private final LikeService likeService;
     private final CommentQueryRepository commentQueryRepository;
 
     /**
@@ -94,7 +96,7 @@ public class CommentController {
     @PostMapping("/like")
     @Operation(summary = "댓글 좋아요", description = "특정 댓글에 좋아요를 추가합니다.")
     public Response<Void> likeComment(@RequestBody LikeRequestDto dto) {
-        commentService.likeComment(dto);
+        likeService.likeComment(dto);
 
         return Response.ok(null);
     }
@@ -109,7 +111,7 @@ public class CommentController {
     @PostMapping("/unlike")
     @Operation(summary = "댓글 좋아요 취소", description = "댓글의 좋아요를 취소합니다.")
     public Response<Void> unlikeComment(@RequestBody LikeRequestDto dto) {
-        commentService.unlikeComment(dto);
+        likeService.unlikeComment(dto);
 
         return Response.ok(null);
     }

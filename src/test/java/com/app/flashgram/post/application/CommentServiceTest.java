@@ -42,7 +42,7 @@ class CommentServiceTest extends PostApplicationTestTemplate {
 
         //when
         LikeRequestDto likeRequestDto = new LikeRequestDto(comment.getId(), otherUser.getId());
-        commentService.likeComment(likeRequestDto);
+        likeService.likeComment(likeRequestDto);
 
         //then
         assertEquals(1, comment.getLikeCount());
@@ -53,10 +53,10 @@ class CommentServiceTest extends PostApplicationTestTemplate {
         //given
         Comment comment = commentService.createComment(commentRequestDto);
         LikeRequestDto likeRequestDto = new LikeRequestDto(comment.getId(), otherUser.getId());
-        commentService.likeComment(likeRequestDto);
+        likeService.likeComment(likeRequestDto);
 
         //when
-        commentService.unlikeComment(likeRequestDto);
+        likeService.unlikeComment(likeRequestDto);
 
         //then
         assertEquals(0, comment.getLikeCount());

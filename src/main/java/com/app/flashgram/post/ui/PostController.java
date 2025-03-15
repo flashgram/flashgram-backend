@@ -2,6 +2,7 @@ package com.app.flashgram.post.ui;
 
 import com.app.flashgram.common.idempotency.Idempotent;
 import com.app.flashgram.common.ui.Response;
+import com.app.flashgram.post.application.LikeService;
 import com.app.flashgram.post.application.PostService;
 import com.app.flashgram.post.application.dto.CreatePostRequestDto;
 import com.app.flashgram.post.application.dto.LikeRequestDto;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostController {
 
     private final PostService postService;
+    private final LikeService likeService;
 
     /**
      * 새로운 게시물 생성
@@ -86,7 +88,7 @@ public class PostController {
     @PostMapping("/like")
     @Operation(summary = "게시글 좋아요", description = "특정 게시글에 좋아요를 추가합니다.")
     public Response<Void> likePost(@RequestBody LikeRequestDto dto) {
-        postService.likePost(dto);
+        likeService.likePost(dto);
 
         return Response.ok(null);
     }
@@ -102,7 +104,7 @@ public class PostController {
     @PostMapping("/unlike")
     @Operation(summary = "게시글 좋아요 취소", description = "게시글의 좋아요를 취소합니다.")
     public Response<Void> unlikePost(@RequestBody LikeRequestDto dto) {
-        postService.unlikePost(dto);
+        likeService.unlikePost(dto);
 
         return Response.ok(null);
     }
