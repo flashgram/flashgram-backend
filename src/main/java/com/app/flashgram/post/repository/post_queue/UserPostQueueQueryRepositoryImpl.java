@@ -85,7 +85,11 @@ public class UserPostQueueQueryRepositoryImpl implements UserPostQueueQueryRepos
                     )
                     .from(postEntity)
                     .join(userEntity).on(postEntity.author.eq(userEntity))
-                    .leftJoin(likeEntity).on(hasLike(userId))
+                    .leftJoin(likeEntity).on(
+                            postEntity.id.eq(likeEntity.id.targetId)
+                                         .and(likeEntity.id.targetType.eq("POST"))
+                                         .and(likeEntity.id.userId.eq(userId))
+                    )
                     .where(postEntity.id.in(postIds))
                     .orderBy(postEntity.id.desc())
                     .fetch();
