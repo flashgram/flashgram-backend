@@ -12,6 +12,8 @@ Thumbs.db
 *.rar
 *.yaml
 *.yml
+*.json
+flashgram-adminsdk.json
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
